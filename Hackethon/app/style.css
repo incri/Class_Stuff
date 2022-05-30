@@ -1,0 +1,85 @@
+body 
+    {background-color: wheat ;
+}
+/* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-image: url("https://scontent.xx.fbcdn.net/v/t1.15752-9/257235563_949226099010372_3074990062296048340_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=lBvjKrlm5AcAX_-ZECB&tn=1embahMT94LLn-5i&_nc_ht=scontent.xx&oh=03_AVISHqAAcVTWNAlAlwkn1J8JFYtETR7BTU8ZPOGpWIDfFQ&oe=62B92AAF");
+    opacity: 0.6;
+    font-family: Arial;
+    padding-bottom: 13%;
+  }
+  
+  /* Links inside the navbar */
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* The dropdown container */
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+  }
+  
+  /* Add a red background color to navbar links on hover */
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: white;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: slategray;
+    opacity: 0.5;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: black;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+/* logo */
+.logo{
+    padding-left: 42%;
+    padding-top: 40px;
+}
+footer {© Copyright
+
+}
