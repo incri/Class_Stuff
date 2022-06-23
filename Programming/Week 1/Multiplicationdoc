@@ -1,0 +1,20 @@
+﻿/** Baibhav Paudel and 2022/06/18
+ * Program to print multiplication of big values with correct data type
+*/
+
+
+public class Multiplication {
+    public static void main(String[] args){
+        final int data1 = 2000000;
+        final long data2 = 4000000;
+
+        long multiplication = data1*data2;
+        System.out.println(data1+"*"+data2+"="+multiplication);
+    } 
+}
+
+DOC-→
+
+
+File name Multiplication is created so we create a class name Multiplication inside the class we create a main function. We created a constant name DATA1 and DATA2 having data type int and long respectively. Then we created a variable multiplication inside we assigned multiplication of two constant.
+Then we perinted the result.

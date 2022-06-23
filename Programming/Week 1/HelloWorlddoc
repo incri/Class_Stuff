@@ -10,3 +10,8 @@ public class HelloWorld {
     }
 }
 
+
+DOC →
+
+
+File name Hello World is created so we create a class name hello World inside the class we create a main function.We printed “Hello World”.

@@ -1,0 +1,36 @@
+﻿public class MiniCalc {
+
+    public int add (int a, int b){
+        return a + b;
+    }
+    public int multiply (int a, int b){
+        return a * b;
+    }
+    public int substract (int a, int b){
+        return a - b;
+    }
+    public float division (float a, float b){
+        return a / b;
+    }
+    public static void main (String[] args){
+        System.out.println("MiniCalc");
+        MiniCalc mc = new MiniCalc();
+        int c = mc.add(1,2);
+        int d = mc.multiply(3 ,4);
+        int e = mc.substract(6, 7);
+        double f = mc.division(10, 7);
+        System.out.println(c + " " + d + " " + e + " " + f);
+    }
+}
+
+DOC-→
+
+
+File name MiniCalc is created so we create a class name MiniCalc inside the class we create a add function having parameter a and b with data type int. function returning addition of a and b (a + b). same like add function we created 3 more function for substraction, multiplication and division.
+
+Then we created our main function , first we print MiniCalc just for a show case then we instantiate our Minicalc class as mc .
+New variable were created to store the result of above function after we pass there value in parameter after calling them. 
+
+Then we printed our result.
+
+
