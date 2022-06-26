@@ -1,0 +1,11 @@
+﻿public class Greeting {
+    public static void main(String[] args) {
+        
+        System.out.println("Hello Namaste");
+    }
+}
+
+DOC →
+
+
+File name Greeting is created so we create a class name Greeting inside the class we create a main function.We printed “Hello Namaste”.

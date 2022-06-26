@@ -1,0 +1,26 @@
+﻿import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+public class Test
+{
+	public static void main(String[] args) throws Exception{
+		URL imageLocation = new URL(
+		"http://horstmann.com/java4everyone/duke.gif");
+	    JOptionPane.showMessageDialog(null, "Namaste", "User",
+	    JOptionPane.PLAIN_MESSAGE, new ImageIcon(imageLocation));
+	}
+}
+
+#Doc
+
+First we import our java.net.URL; in order to use provide link reader in our program.
+
+Instantiate URL class providing link of image for icon.
+
+we import our javax.swing.JoptionPane in order to use JoptionPane.
+
+File name DialogViewer is created so we create a class name DialogViewer, inside the class we created a main function. Then we use our JoptionPane class to make a popup dialogbox where through our showMessageDialog function to show our required massage in our created dialog box.
+
+At last JoptionPane.PLAIN_MESSAGE and ImageIcon are used to display dialog box having icon on it with given message.
+
