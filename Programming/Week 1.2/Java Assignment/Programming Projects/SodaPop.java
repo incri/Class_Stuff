@@ -11,7 +11,7 @@ public class SodaPop {
 
 
         final int CURRENT_WEIGHT = 145000;// in gram
-        final int DESIRED_WEIGHT = 75000;// in gram
+        //final int DESIRED_WEIGHT = 75000;// in gram
 
         final double LIMIT_SAFE_POINT = 0.5;//in percent
 
