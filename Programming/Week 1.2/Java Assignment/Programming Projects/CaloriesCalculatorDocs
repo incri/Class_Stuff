@@ -1,0 +1,58 @@
+﻿/*One way to measure the amount of energy that is expended during exercise is to use 
+metabolic equivalents (MET).  Here are some METS for various activities:
+
+Running 6 MPH: 10 METS
+Basketball: 8 METS
+Sleeping: 1 MET
+
+The number of calories burned per minute may be estimated using the following formula:
+
+CaloriesjMinute = 0.0175 * MET * Weight in kilograms
+
+Write a program that calculates and outputs the total number of calories 
+burned for a 150-pound person who runs 6 MPH for 30 minutes, plays basketball for 
+30 minutes, and then sleeps for 6 hours.  One kilogram is equal to 2.2 pounds. */
+
+
+
+public class CaloriesCalculator {
+    public static int calories() {
+
+        int runningMET = 10;
+        int basketballMET = 8;
+        int sleepingMET = 1;
+
+        final int minute = 60;
+
+        int runTime = minute / 2;
+        int basketballTime = minute / 30;
+        int sleepTime = minute * 6;
+
+        int IntialWeightInKg = 150;
+        final double weightInPound = IntialWeightInKg * 2.2;
+
+        double caloriesWhileRunning = ((0.0175*runningMET*weightInPound)*runTime);
+        double caloriesWhileBasketball = ((0.0175*basketballMET*weightInPound)*basketballTime);
+        double caloriesWhileSleep = ((0.0175*sleepingMET*weightInPound)*sleepTime);
+
+        return ((int)caloriesWhileRunning + (int)caloriesWhileBasketball + (int)caloriesWhileSleep);
+    }
+    public static void main(String[] args) {
+        
+        System.out.println("Total Calories Burned in Pound  : " + CaloriesCalculator.calories());
+    }
+}
+
+#Docs
+
+File name CaloriesCalculator is created so we create a class name CaloriesCalculator, inside the class we created a calories function having return type int. Lets make some variables to make our life easy. For  storing given data we created three variable named runningMet, basketballMet, sleppingMet having data type int. Then we created a constant for our coversion of time named as minute with data type int and literal 60. It’s time store the given time but with respect to our minute constant. We created three variable named runTime, basketballTime, sleepTime with data type int. yes more vaiable coming through….. to calculate calories burn we need a initial wight of a body so we create a initialWeightInKg having data type int and leteral taken as 150. Now we need to convert our weight of kg in pound so we create a constant named weightINPound having data type double as we have to multiply our weight variable with our 2.2 value it converted into pound.
+
+ Now lets calculate.
+
+
+TO calculate the calories burn during the runtime we create a variable calorieWhileRunning to store our calculated value. Like whise 2 more variable are created to store the calculated value for basketballtime and sleeptime named calorieWhileBasketball and caloriesWhileSleep respectively. All we given data type double as it has to interract with the decimal value. 
+
+Ok lets end this function with our return statement which return us sum of all the value of  calorieWhileRunning,  calorieWhileBasketball and  calorieWhileSleep.
+
+Now we create our main function where our print function data with the appropriate strings.
+

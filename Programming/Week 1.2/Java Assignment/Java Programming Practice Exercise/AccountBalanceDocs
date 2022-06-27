@@ -19,3 +19,4 @@
 File name AccountBalance is created so we create a class name AccountBalance, inside the class we created a main function. Then we created two variable named the percent and balance having data type double and int respectively. Now to
 to print the balance of an account after the first, secound and third year where every year balance is increased by 5%. We created three more variable to store the balance of every year and increace 5% every year at previous year balance.
 Then we print our total balace at the end of three year.
+ 
