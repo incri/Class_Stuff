@@ -21,7 +21,7 @@ public class SodaPop {
 
         final double SWEETENER_LEVEL = 0.001; //in percent
         final double SODA_WEIGHT = 200; // in gram
-        double SweetenerInSoda = SODA_WEIGHT * SWEETENER_LEVEL;// in gram
+        final double SweetenerInSoda = SODA_WEIGHT * SWEETENER_LEVEL;// in gram
 
 
         final double SWEETENER_TO_KILL_MOUSE = 8;// in gram
@@ -42,3 +42,8 @@ public class SodaPop {
          System.out.println(sodaConsumeLimit);
     }
 }
+
+#Doc
+
+File name SodaPop is created so we create a class name SodaPop, inside the class we created a main function.Accorfing to our question lets create some constant, We create SWEETENER_LEVEL, SODA_WEIGHT, SWEETENER_TO_KILL_MOUSE, MOUSE_WEIGHT, CURRENT_WEIGHT, LIMIT_SAFE_POINT as from there we can know what they are used to store the value for. Then we calclate as the instruction given and formula.
+Then print all the data.

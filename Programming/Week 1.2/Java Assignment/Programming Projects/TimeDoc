@@ -1,0 +1,21 @@
+﻿/* Write a program that outputs the number of hours, minutes, and seconds that 
+corresponds to 50,391 total seconds.  The output should be 13 hours, 59 minutes, and 51 seconds. 
+Test your program with a different number of total seconds to ensure that it works for other cases. */
+
+
+public class Time {
+    public static void main(String[] args) {
+        
+        int givenSecound = 50391;
+        final int MINUTE = 60;
+        int hour = givenSecound / (MINUTE*MINUTE);
+        int minute = (givenSecound % (MINUTE*MINUTE)/MINUTE);
+        int secound = ((givenSecound % (MINUTE*MINUTE))%MINUTE);
+        System.out.println("In "+ givenSecound + " Secound " + " There are " + hour + " Hours, " + minute + " Minute and " + secound + " Secound .");
+
+    }
+}
+
+#Doc
+
+File name Time is created so we create a class name Time, inside the class we created a main function. Lets Create a variable to store our given data of secounds and a constant to save secounds in a minute. Then we create our variable to store how much hour is it in given secound . Calculating remaining secound then we create another variable to store how much minute are there in remaining secound. Then the secound variable stores the last remained secounds. Print the data with appropriate sentence.
