@@ -19,6 +19,6 @@ public class MiniCalc {
         int d = mc.multiply(3 ,4);
         int e = mc.substract(6, 7);
         double f = mc.division(10, 7);
-        System.out.println(c + " " + d + " " + e + " " + f);
+        System.out.println(c + ", " + d + ", " + e + ", " + f);
     }
 }
