@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Extract {
     public static float price;
-    public static int dollars, cent;
+    public int dollars;
+    public int cent;
 
     public Extract() {
         dollars = (int)(price);
@@ -16,6 +17,6 @@ public class Extract {
         scan.close();
 
         Extract ex = new Extract();
-        System.out.println(Extract.dollars + " Dollars, " + Extract.cent + " cents ");
+        System.out.println(ex.dollars + " Dollars, " + ex.cent + " cents ");
     }
 }
