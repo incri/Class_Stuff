@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GreenBottles{
     public void tenGreenBottles(){
         for (int i=10; i>0; i--){
@@ -12,6 +14,10 @@ public class GreenBottles{
             }
         }
     }public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the total number of green bottles: ");
+        int n = scanner.nextInt();
+        scanner.close();
         GreenBottles gb = new GreenBottles();
         gb.tenGreenBottles();
     }
