@@ -1,5 +1,6 @@
 public class Account {
-    private int openingBalance;
+    //initializing variables
+
     private int currentBalance;
     private int creditLimit;
     private String holderName;
@@ -12,7 +13,7 @@ public class Account {
      * Constructor
      */
     public Account(int startAmount, int balance, int credit, String Name, String Address)  {       
-        openingBalance = startAmount;
+        
         currentBalance = balance;
         creditLimit = credit;
         holderName = Name;
