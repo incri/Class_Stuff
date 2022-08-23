@@ -1,7 +1,7 @@
 package BusinessLayer;
 // This class uses the user model to receive and send data to the database layer
 // This class uses the user model to receive data from the frontend layer
-import Models.User;
+import Models.Users;
 
 import java.util.ArrayList;
 
@@ -9,17 +9,17 @@ import DatabaseLayer.DLUser;
 import Helper.InputException;
 
 public class BLUser {
-	User user;
+	Users user;
 	
 	public BLUser() {
-		this.user = new User();
+		this.user = new Users();
 	}
 	
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) throws InputException {
+	public void setUser(Users user) throws InputException {
 		try {
 			if(this.validateUser(user)) {
 				this.user = user;
@@ -29,7 +29,7 @@ public class BLUser {
 		}
 	}
 	
-	private boolean validateUser(User user) throws InputException {
+	private boolean validateUser(Users user) throws InputException {
 		if(user.getName() == null || user.getName().length() == 0) {
 			throw new InputException("User name cannot be empty.");
 		}
@@ -41,7 +41,7 @@ public class BLUser {
 	
 	// save the user, update the user, delete the user, getUserList
 	
-	public User save() throws Exception {
+	public Users save() throws Exception {
 		// This function saves the user detail to database and 
 		// returns the user object after saving
 		try {
@@ -52,7 +52,7 @@ public class BLUser {
 		}
 	}
 	
-	public User update() throws Exception {
+	public Users update() throws Exception {
 		// This function saves the user detail to database and returns the user object after saving
 		try {
 			DLUser dlUser = new DLUser(this.user);
@@ -72,7 +72,7 @@ public class BLUser {
 		}
 	}
 	
-	public ArrayList<User> getAllUser() throws Exception {
+	public ArrayList<Users> getAllUser() throws Exception {
 		try {
 			DLUser dlUser = new DLUser(this.user);
 			return dlUser.getAllUser();
@@ -81,7 +81,7 @@ public class BLUser {
 		}
 	}
 	
-	public ArrayList<User> searchUser(String[] keys, String[] values) throws Exception{
+	public ArrayList<Users> searchUser(String[] keys, String[] values) throws Exception{
 		try {
 			DLUser dlUser = new DLUser(this.user);
 			return dlUser.searchUser(keys, values);

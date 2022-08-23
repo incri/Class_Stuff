@@ -15,20 +15,20 @@ public class DatabaseConnector {
 	private String dbUserName = null;
 	private String dbPassword = null;
 	
-	// Database connections
+	// Database connection
 	private Connection conn = null;
 	
 	private void setConnectionString() {
 		this.driverClass = "com.mysql.cj.jdbc.Driver";
 		this.hostName = "localhost";
 		this.portNumber = "3306";
-		this.databaseName = "java_test";
+		this.databaseName = "hotel_luton";
 		this.dbUserName = "incri";
 		this.dbPassword = "fastrack";
 		
 		this.connectionString = "jdbc:mysql://"+this.hostName+":"+this.portNumber+"/"+this.databaseName;
 	}
-	
+
 	private DatabaseConnector() throws Exception {
 		try {
 			this.setConnectionString();

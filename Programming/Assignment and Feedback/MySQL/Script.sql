@@ -1,27 +1,19 @@
-CREATE TABLE User(
+CREATE TABLE Account(
 #Creating User Table
 User_ID INT(10) PRIMARY KEY,
-User_Name VARCHAR(50) NOT NULL UNIQUE,
-Email_Address VARCHAR(50) NOT NULL UNIQUE,
+UserName VARCHAR(50) NOT NULL UNIQUE,
+EmailAddress VARCHAR(50) NOT NULL UNIQUE,
 Password VARCHAR(50) NOT NULL,
-User_Type VARCHAR(50) NOT NULL
+UserType VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Customer (
+CREATE TABLE Users (
 #Creating Customer Table
 Cus_ID INT(10) PRIMARY KEY,
-First_Name VARCHAR(50) NOT NULL,
-Last_Name VARCHAR(50) NOT NULL,
+FirstName VARCHAR(50) NOT NULL,
+LastName VARCHAR(50) NOT NULL,
+CompanyName VARCHAR(110),
+CompanyContact VARCHAR(50),
 UserUser_ID INT(10) NOT NULL,
-FOREIGN KEY (UserUser_ID) REFERENCES User(User_ID)
-);
-
-CREATE TABLE Staff (
-#Creating Staff Table
-Staff_ID INT(10) PRIMARY KEY,
-staff_First_Name VARCHAR(50) NOT NULL,
-Staff_Last_Name VARCHAR(50) NOT NULL,
-Staff_Contact VARCHAR(50) NOT NULL,
-UserUser_ID INT(10) NOT NULL,
-FOREIGN KEY (UserUser_ID) REFERENCES User(User_ID)
+FOREIGN KEY (UserUser_ID) REFERENCES Account(User_ID)
 );

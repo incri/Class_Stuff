@@ -1,10 +1,6 @@
 package FrontendLayer;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
+@SuppressWarnings("serial")
 public class WelcomePage extends JFrame {
 
 	private JPanel contentPane;

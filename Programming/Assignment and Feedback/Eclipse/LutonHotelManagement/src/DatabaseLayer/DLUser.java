@@ -1,6 +1,7 @@
 package DatabaseLayer;
 
-import Models.User;
+import Models.Users;
+
 import Helper.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,13 +11,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DLUser {
-	private User user;
+	private Users user;
 	private DatabaseConnector db;
 	private Connection connection;
 	
 	
 	public DLUser() throws Exception {
-		this.user = new User();
+		this.user = new Users();
 		try {
 			this.db = DatabaseConnector.getInstance();
 			this.connection = this.db.getConnection();
@@ -25,7 +26,7 @@ public class DLUser {
 		}
 	}
 	
-	public DLUser(User user) throws Exception {
+	public DLUser(Users user) throws Exception {
 		this.user = user;
 		try {
 			this.db = DatabaseConnector.getInstance();
@@ -35,15 +36,15 @@ public class DLUser {
 		}
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	
-	public User save() throws Exception {
+	public Users save() throws Exception {
 		try {
 			// prepare for the data to be returned in case of insert
 			String generatedColumns[] = {"id","name"};
@@ -68,7 +69,7 @@ public class DLUser {
 		}
 	}
 	
-	public User update() throws Exception {
+	public Users update() throws Exception {
 		try {
 			// create the statement
 			String query = "UPDATE user  SET name=? , address=? WHERE id=?";
@@ -97,14 +98,14 @@ public class DLUser {
 		}
 	}
 	
-	public ArrayList<User> getAllUser() throws Exception {
+	public ArrayList<Users> getAllUser() throws Exception {
 		try {
-			ArrayList<User> users = new ArrayList<User>();
+			ArrayList<Users> users = new ArrayList<Users>();
 			String query = "SELECT * FROM user ORDER BY name";
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
-				User u = new User();
+				Users u = new Users();
 				u.setUserId(rs.getInt("id"));
 				u.setName(rs.getString("name"));
 				u.setAddress(rs.getString("address"));
@@ -117,9 +118,9 @@ public class DLUser {
 		}
 	}
 	
-	public ArrayList<User> searchUser(String[] keys, String[] values) throws Exception{
+	public ArrayList<Users> searchUser(String[] keys, String[] values) throws Exception{
 		// SELECT * FROM user WHERE name LIKE '%Hari%' AND address LIKE '%PCPS%' ;
-		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<Users> users = new ArrayList<Users>();
 		try {
 			int keyLength = keys.length;
 			String where = "";
@@ -134,7 +135,7 @@ public class DLUser {
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
-				User u = new User();
+				Users u = new Users();
 				u.setUserId(rs.getInt("id"));
 				u.setName(rs.getString("name"));
 				u.setAddress(rs.getString("address"));

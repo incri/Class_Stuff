@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import BusinessLayer.BLUser;
 import Helper.InputException;
-import Models.User;
+import Models.Users;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -136,7 +136,7 @@ public class Dashboard {
 		// Create an object of Business Layer and pass the model to business layer
 		// Perform the required action from the business layer.
 		try {
-			User user = new User();
+			Users user = new Users();
 			user.setName(tfName.getText());
 			user.setAddress(tfAddress.getText());
 			
@@ -157,7 +157,7 @@ public class Dashboard {
 	private void loadAllUser() {
 		try {
 			BLUser bl = new BLUser();
-			ArrayList<User> users = bl.getAllUser();
+			ArrayList<Users> users = bl.getAllUser();
 			setTableData(users);
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -171,7 +171,7 @@ public class Dashboard {
 		try {
 			String[] keys, values;
 			BLUser bl = new BLUser();
-			ArrayList<User> users;
+			ArrayList<Users> users;
 			if(tfSearchName.getText().length()>0 && tfSearchAddress.getText().length()>0) {
 				keys = new String[2];
 				values = new String[2];
@@ -197,7 +197,7 @@ public class Dashboard {
 		}
 	}
 	
-	private void setTableData(ArrayList<User> users) {
+	private void setTableData(ArrayList<Users> users) {
 		// Create the object array from arraylist and add to the table row
 		Object[] rowData = new Object[3];
 		// set the number of rows in table model to zero

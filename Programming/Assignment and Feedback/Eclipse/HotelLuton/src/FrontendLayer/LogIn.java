@@ -1,7 +1,5 @@
 package FrontendLayer;
 
-import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -13,7 +11,10 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class LogIn extends JInternalFrame {
 	private JTextField liEmailAddreessTextField;
 	private JPasswordField liPasswordPassField;
@@ -74,6 +75,10 @@ public class LogIn extends JInternalFrame {
 		logInPanel.add(liPasswordPassField);
 		
 		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnLogin.setBounds(117, 262, 105, 27);
 		logInPanel.add(btnLogin);
 

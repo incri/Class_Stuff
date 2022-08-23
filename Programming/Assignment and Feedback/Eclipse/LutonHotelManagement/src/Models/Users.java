@@ -1,17 +1,17 @@
 package Models;
 
-public class User {
+public class Users {
 	private int userId;
 	private String name;
 	private String address;
 	
-	public User() {
+	public Users() {
 		this.userId = 0;
 		this.name = "";
 		this.address = "";
 	}
 	
-	public User(int id, String name, String address) {
+	public Users(int id, String name, String address) {
 		this.userId = id;
 		this.name = name;
 		this.address = address;
