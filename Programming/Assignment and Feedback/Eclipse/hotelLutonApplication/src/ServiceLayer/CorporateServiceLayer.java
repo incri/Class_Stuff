@@ -3,10 +3,11 @@ package ServiceLayer;
 // This class uses the corporate model to receive data from the frontend layer
 import Models.Corporate;
 
+
 import java.util.ArrayList;
 
 import DatabaseLayer.CorporateDatabaseLayer;
-import DatabaseLayer.CorporateDatabaseLayer;
+
 import Helper.InputException;
 
 public class CorporateServiceLayer {
@@ -31,13 +32,11 @@ public class CorporateServiceLayer {
 	}
 	
 	private boolean validateUser(Corporate corporate) throws InputException {
-		if(corporate.getCompanyName() == null || corporate.getFirstName().length() == 0) {
-			throw new InputException("First name cannot be empty.");
+		if(corporate.getCompanyName() == null || corporate.getCompanyName().length() == 0) {
+			throw new InputException("Company name cannot be empty.");
 		}
-		if(corporate.getCompanyContact() == null || corporate.getContactName().length() == 0) {
-			throw new InputException("Last name cannot be empty.");
-		}
-		}
+		
+		
 		
 		return true;
 	}
@@ -75,10 +74,10 @@ public class CorporateServiceLayer {
 		}
 	}
 	
-	public ArrayList<Corporate> getAllUser() throws Exception {
+	public ArrayList<Corporate> getAllCorporate() throws Exception {
 		try {
 			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.getAllUser();
+			return corporateDatabaseLayer.getAllCorporate();
 		}catch(Exception e) {
 			throw e;
 		}
@@ -87,7 +86,7 @@ public class CorporateServiceLayer {
 	public ArrayList<Corporate> searchUser(String[] keys, String[] values) throws Exception{
 		try {
 			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.searchUser(keys, values);
+			return corporateDatabaseLayer.searchCorporate(keys, values);
 		}catch(Exception e) {
 			throw e;
 		}

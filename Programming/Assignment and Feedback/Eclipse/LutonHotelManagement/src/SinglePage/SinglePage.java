@@ -22,6 +22,10 @@ import java.awt.Color;
 
 public class SinglePage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7893839535797907740L;
 	private JPanel contentPane;
 	private JTextField tfName;
 	private JTextField tfAddress;
@@ -101,8 +105,7 @@ public class SinglePage extends JFrame {
 						ResultSet rs = statement.getGeneratedKeys();
 						// data is read one row at a time
 						if (rs.next()) {
-							// Read the exact field
-							int id = rs.getInt(1);
+							rs.getInt(1);
 							// Display the data
 							String detail = tfName.getText() + " living at " + tfAddress.getText() + " data stored";
 							taData.setText(detail);

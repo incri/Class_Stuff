@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class SignUpBox extends JInternalFrame {
+	private static final long serialVersionUID = 2847886222788979421L;
 	private JTextField siFirstTextField;
 	private JTextField siLastTextField;
 	private JTextField siEmailTextField;
@@ -38,7 +39,7 @@ public class SignUpBox extends JInternalFrame {
 		getContentPane().add(signTitle);
 		
 		JLabel siLogoLabel = new JLabel("");
-		Image logo = new ImageIcon(this.getClass().getResource("/LOGO.png")).getImage();
+		Image logo = new ImageIcon(this.getClass().getResource("/LOGO2.png")).getImage();
 		siLogoLabel.setIcon(new ImageIcon(logo));
 		siLogoLabel.setBounds(31, 12, 90, 80);
 		getContentPane().add(siLogoLabel);

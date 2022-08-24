@@ -55,7 +55,7 @@ public class CustomerDatabaseLayer {
 				ResultSet rs = statement.getGeneratedKeys();
 				if(rs.next()) {
 					int customerID = rs.getInt(1);
-					String name = rs.getString(2);
+					rs.getString(2);
 					this.customer.setCusID(customerID);
 				}	
 			}
@@ -95,7 +95,7 @@ public class CustomerDatabaseLayer {
 		}
 	}
 	
-	public ArrayList<Customer> getAllUser() throws Exception {
+	public ArrayList<Customer> getAllCustomer() throws Exception {
 		try {
 			ArrayList<Customer> customers = new ArrayList<Customer>();
 			String query = "SELECT * FROM Customer ORDER BY customerName";
@@ -116,7 +116,7 @@ public class CustomerDatabaseLayer {
 		}
 	}
 	
-	public ArrayList<Customer> searchUser(String[] keys, String[] values) throws Exception{
+	public ArrayList<Customer> searchCustomer(String[] keys, String[] values) throws Exception{
 		// SELECT * FROM customer WHERE name LIKE '%Hari%' AND address LIKE '%PCPS%' ;
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		try {

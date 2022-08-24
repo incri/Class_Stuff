@@ -54,7 +54,7 @@ public class CorporateDatabaseLayer {
 				ResultSet rs = statement.getGeneratedKeys();
 				if(rs.next()) {
 					int corporateID = rs.getInt(1);
-					String name = rs.getString(2);
+					rs.getString(2);
 					this.corporate.setCorpID(corporateID);
 				}	
 			}
@@ -93,7 +93,7 @@ public class CorporateDatabaseLayer {
 		}
 	}
 	
-	public ArrayList<Corporate> getAllUser() throws Exception {
+	public ArrayList<Corporate> getAllCorporate() throws Exception {
 		try {
 			ArrayList<Corporate> corporates = new ArrayList<Corporate>();
 			String query = "SELECT * FROM Corporate ORDER BY corporateName";
@@ -113,7 +113,7 @@ public class CorporateDatabaseLayer {
 		}
 	}
 	
-	public ArrayList<Corporate> searchUser(String[] keys, String[] values) throws Exception{
+	public ArrayList<Corporate> searchCorporate(String[] keys, String[] values) throws Exception{
 		// SELECT * FROM corporate WHERE name LIKE '%Hari%' AND address LIKE '%PCPS%' ;
 		ArrayList<Corporate> corporates = new ArrayList<Corporate>();
 		try {

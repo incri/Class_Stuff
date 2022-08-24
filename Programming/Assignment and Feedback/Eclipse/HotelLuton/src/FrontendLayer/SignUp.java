@@ -23,6 +23,7 @@ import java.awt.SystemColor;
 
 
 public class SignUp extends JInternalFrame {
+	private static final long serialVersionUID = -2196394126468688508L;
 	private JTextField siFirstTextField;
 	private JTextField siLastTextField;
 	private JTextField siEmailTextField;

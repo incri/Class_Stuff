@@ -15,9 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
-@SuppressWarnings("serial")
+
 public class WelcomePage extends JFrame {
 
+	private static final long serialVersionUID = 7881920390015596332L;
 	private JPanel contentPane;
 
 	/**
@@ -91,7 +92,7 @@ public class WelcomePage extends JFrame {
 		contentPane.add(logoLabel);
 		
 		JLabel WallpapperLabel = new JLabel("");
-		Image wallpaper = new ImageIcon(this.getClass().getResource("/HotelWallpapper.jpg")).getImage();
+		Image wallpaper = new ImageIcon(this.getClass().getResource("/HotelWallpaper.jpg")).getImage();
 		WallpapperLabel.setIcon(new ImageIcon(wallpaper));
 		WallpapperLabel.setBackground(Color.WHITE);
 		WallpapperLabel.setBounds(12, 12, 1256, 623);

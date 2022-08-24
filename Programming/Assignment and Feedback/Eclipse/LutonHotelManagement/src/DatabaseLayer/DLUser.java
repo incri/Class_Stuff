@@ -59,7 +59,7 @@ public class DLUser {
 				ResultSet rs = statement.getGeneratedKeys();
 				if(rs.next()) {
 					int id = rs.getInt(1);
-					String name = rs.getString(2);
+					rs.getString(2);
 					this.user.setUserId(id);
 				}	
 			}

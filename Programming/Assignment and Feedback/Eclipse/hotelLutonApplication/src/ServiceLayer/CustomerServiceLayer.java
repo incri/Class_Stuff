@@ -3,9 +3,9 @@ package ServiceLayer;
 // This class uses the customer model to receive data from the frontend layer
 import Models.Customer;
 
+
 import java.util.ArrayList;
 
-import DatabaseLayer.CustomerDatabaseLayer;
 import DatabaseLayer.CustomerDatabaseLayer;
 import Helper.InputException;
 
@@ -77,10 +77,10 @@ public class CustomerServiceLayer {
 		}
 	}
 	
-	public ArrayList<Customer> getAllUser() throws Exception {
+	public ArrayList<Customer> getAllCustomer() throws Exception {
 		try {
 			CustomerDatabaseLayer customerDatabaseLayer = new CustomerDatabaseLayer(this.customer);
-			return customerDatabaseLayer.getAllUser();
+			return customerDatabaseLayer.getAllCustomer();
 		}catch(Exception e) {
 			throw e;
 		}
@@ -89,7 +89,7 @@ public class CustomerServiceLayer {
 	public ArrayList<Customer> searchUser(String[] keys, String[] values) throws Exception{
 		try {
 			CustomerDatabaseLayer customerDatabaseLayer = new CustomerDatabaseLayer(this.customer);
-			return customerDatabaseLayer.searchUser(keys, values);
+			return customerDatabaseLayer.searchCustomer(keys, values);
 		}catch(Exception e) {
 			throw e;
 		}

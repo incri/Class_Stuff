@@ -55,7 +55,7 @@ public class UserDatabaseLayer {
 				ResultSet rs = statement.getGeneratedKeys();
 				if(rs.next()) {
 					int userID = rs.getInt(1);
-					String name = rs.getString(2);
+					rs.getString(2);
 					this.user.setUserID(userID);
 				}	
 			}
