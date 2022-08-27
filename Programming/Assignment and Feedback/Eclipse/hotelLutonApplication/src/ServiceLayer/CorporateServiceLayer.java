@@ -2,12 +2,12 @@ package ServiceLayer;
 // This class uses the corporate model to receive and send data to the database layer
 // This class uses the corporate model to receive data from the frontend layer
 import Models.Corporate;
-
+import Models.Customer;
 
 import java.util.ArrayList;
 
 import DatabaseLayer.CorporateDatabaseLayer;
-
+import DatabaseLayer.CustomerDatabaseLayer;
 import Helper.InputException;
 
 public class CorporateServiceLayer {
@@ -23,7 +23,7 @@ public class CorporateServiceLayer {
 
 	public void setCorporate(Corporate corporate) throws InputException {
 		try {
-			if(this.validateUser(corporate)) {
+			if(this.ValidateCorporate(corporate)) {
 				this.corporate = corporate;
 			}
 		}catch(InputException ex) {
@@ -31,64 +31,30 @@ public class CorporateServiceLayer {
 		}
 	}
 	
-	private boolean validateUser(Corporate corporate) throws InputException {
+public boolean ValidateCorporate(Corporate corporate) throws InputException {
+		
 		if(corporate.getCompanyName() == null || corporate.getCompanyName().length() == 0) {
 			throw new InputException("Company name cannot be empty.");
 		}
-		
-		
+		if(corporate.getCompanyContact() == null || corporate.getCompanyContact().length() == 0) {
+			throw new InputException("Company Contact cannot be empty.");
+		}
 		
 		return true;
 	}
 	
+	
+	public Corporate corporateSave(Corporate corporate) throws Exception {
+		try {
+			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(corporate);
+			return corporateDatabaseLayer.corporateSave();
+		}catch(Exception e) {
+			throw e;
+		}
+		
+	}
+	
+}
 	// save the corporate, update the corporate, delete the corporate, getCorporateList
 	
-	public Corporate save() throws Exception {
-		// This function saves the corporate detail to database and 
-		// returns the corporate object after saving
-		try {
-			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.save();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
 	
-	public Corporate update() throws Exception {
-		// This function saves the corporate detail to database and returns the corporate object after saving
-		try {
-			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.update();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	
-	public void delete() throws Exception {
-		// This function saves the corporate detail to database and returns the corporate object after saving
-		try {
-			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			corporateDatabaseLayer.delete();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	
-	public ArrayList<Corporate> getAllCorporate() throws Exception {
-		try {
-			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.getAllCorporate();
-		}catch(Exception e) {
-			throw e;
-		}
-	}
-	
-	public ArrayList<Corporate> searchUser(String[] keys, String[] values) throws Exception{
-		try {
-			CorporateDatabaseLayer corporateDatabaseLayer = new CorporateDatabaseLayer(this.corporate);
-			return corporateDatabaseLayer.searchCorporate(keys, values);
-		}catch(Exception e) {
-			throw e;
-		}
-	}                                                                                                                                                                                                                                                                                                                                                                                                
-}

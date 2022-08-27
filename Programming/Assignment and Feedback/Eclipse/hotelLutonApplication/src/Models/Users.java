@@ -1,31 +1,34 @@
 package Models;
 
 public class Users {
-	private int userID;
+	private static int userID;
 	private String email;
 	private String userName;
 	private String password;
+	private String userType;
 	
 	public Users() {
-		this.userID = 0;
+		Users.userID = 0;
 		this.email = "";
 		this.userName = "";
-		this.password= "";
+		this.password = "";
+		this.userType = "";
 	}
 	
-	public Users(int id, String email, String userName, String password ) {
-		this.userID = id;
+	public Users(int id, String email, String userName, String password, String role ) {
+		Users.userID = id;
 		this.email = email;
 		this.userName = userName;
 		this.password = password;
+		this.userType = userType;
 	}
 
-	public int getUserID() {
+	public static int getUserID() {
 		return userID;
 	}
 
 	public void setUserID(int userID) {
-		this.userID = userID;
+		Users.userID = userID;
 	}
 
 	public String getEmail() {
@@ -50,6 +53,14 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	
 	

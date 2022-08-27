@@ -3,15 +3,15 @@ package Models;
 public class Corporate {
 	private int corpID;
 	private String companyName;
-	private int companyContact;
+	private String companyContact;
 	
 	public Corporate() {
 		this.corpID = 0;
 		this.companyName = "";
-		this.companyContact = 0;
+		this.companyContact = "";
 	}
 	
-	public Corporate(int corpID, String companyName, int companyContact ) {
+	public Corporate(int corpID, String companyName, String companyContact ) {
 		this.corpID = corpID;
 		this.companyName = companyName;
 		this.companyContact = companyContact;
@@ -33,11 +33,11 @@ public class Corporate {
 		this.companyName = companyName;
 	}
 
-	public int getCompanyContact() {
+	public String getCompanyContact() {
 		return companyContact;
 	}
 
-	public void setCompanyContact(int companyContact) {
+	public void setCompanyContact(String companyContact) {
 		this.companyContact = companyContact;
 	}
 	

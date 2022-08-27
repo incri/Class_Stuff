@@ -58,6 +58,9 @@ public class WelcomePage extends JFrame {
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 22));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LogInBox logIn = new LogInBox();
+				logIn.setVisible(true);
+				externalDesktopPane.add(logIn);
 			}
 		});
 		btnNewButton.setBounds(482, 178, 194, 69);

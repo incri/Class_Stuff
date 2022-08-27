@@ -1,29 +1,41 @@
 package FrontendLayer;
 
 import java.awt.Color;
+
+
+
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import Helper.InputException;
+import Models.Customer;
+import Models.Users;
+import ServiceLayer.CustomerServiceLayer;
+import ServiceLayer.UserServiceLayer;
+import javax.swing.JCheckBox;
+
 public class SignUpBox extends JInternalFrame {
-	private static final long serialVersionUID = 2847886222788979421L;
 	private JTextField siFirstTextField;
 	private JTextField siLastTextField;
 	private JTextField siEmailTextField;
 	private JTextField siUsersNameTextField;
 	private JPasswordField siPasswordPassField;
+	private JPasswordField siConfirmPasswordPassField;
+	public JCheckBox corporateCheckBox;
 	/**
 	 * Create the frame.
 	 */
@@ -80,10 +92,10 @@ public class SignUpBox extends JInternalFrame {
 		siEmailAddreessLabel.setBounds(12, 113, 179, 17);
 		signInPanel.add(siEmailAddreessLabel);
 		
-		JLabel siUsersNameLabel_3 = new JLabel("Users Name");
-		siUsersNameLabel_3.setFont(new Font("Dialog", Font.BOLD, 18));
-		siUsersNameLabel_3.setBounds(299, 115, 179, 17);
-		signInPanel.add(siUsersNameLabel_3);
+		JLabel siUsersNameLabel = new JLabel("Users Name");
+		siUsersNameLabel.setFont(new Font("Dialog", Font.BOLD, 18));
+		siUsersNameLabel.setBounds(299, 115, 179, 17);
+		signInPanel.add(siUsersNameLabel);
 		
 		siEmailTextField = new JTextField();
 		siEmailTextField.setColumns(10);
@@ -107,34 +119,98 @@ public class SignUpBox extends JInternalFrame {
 		
 		
 		JButton btnSignup = new JButton("SIGNUP");
+		btnSignup.setBounds(12, 356, 115, 39);
+		signInPanel.add(btnSignup);
 		btnSignup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				saveUser();
+				saveCustomer();
+				CorporateBox.saveCorporate();
 			}
 		});
-		btnSignup.setBounds(36, 329, 115, 39);
-		signInPanel.add(btnSignup);
+		
 		
 		
 		JDesktopPane coDesktopPane = new JDesktopPane();
 		coDesktopPane.setBackground(SystemColor.scrollbar);
-		coDesktopPane.setBounds(185, 278, 329, 117);
+		coDesktopPane.setBounds(218, 278, 296, 117);
 		signInPanel.add(coDesktopPane);
 		
-		JButton btnNewButton = new JButton("As corporate");
-		btnNewButton.addActionListener(new ActionListener() {
+		corporateCheckBox = new JCheckBox("As Corporate");
+		corporateCheckBox.setBounds(12, 278, 115, 27);
+		signInPanel.add(corporateCheckBox);
+		
+		JButton btnCorporateButton = new JButton("Add Company Details");
+		btnCorporateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Corporate corporate = new Corporate();
-				corporate.setVisible(true);
-				coDesktopPane.add(corporate);
-			}
-			
-			
+				if(corporateCheckBox.isSelected()) {
+					CorporateBox corporate = new CorporateBox();
+					corporate.setVisible(true);
+					coDesktopPane.add(corporate);
+				}
+			}	
 		});
-		btnNewButton.setBounds(272, 227, 132, 27);
-		signInPanel.add(btnNewButton);
+		btnCorporateButton.setBounds(12, 317, 179, 27);
+		signInPanel.add(btnCorporateButton);	
+		
+		JLabel siConfirmPasswordTextField = new JLabel("Confirm Password");
+		siConfirmPasswordTextField.setFont(new Font("Dialog", Font.BOLD, 18));
+		siConfirmPasswordTextField.setBounds(299, 197, 179, 17);
+		signInPanel.add(siConfirmPasswordTextField);
+		
+		siConfirmPasswordPassField = new JPasswordField();
+		siConfirmPasswordPassField.setColumns(10);
+		siConfirmPasswordPassField.setBounds(299, 225, 215, 31);
+		signInPanel.add(siConfirmPasswordPassField);
 		
 		
 	}
-
+	
+	
+	
+	private void saveUser() {
+		// On click of the save button
+		// Read data from the fields and store it in the model
+		// Create an object of Business Layer and pass the model to business layer
+		// Perform the required action from the business layer.
+		try {
+			Users user = new Users();
+			user.setEmail(siEmailTextField.getText());
+			user.setUserName(siUsersNameTextField.getText());
+			user.setPassword(String.valueOf(siPasswordPassField.getPassword()));
+			
+			UserServiceLayer UserSL = new UserServiceLayer();
+			UserSL.setUser(user);
+			user = UserSL.userSave(user);
+		}
+		catch(InputException ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+	}
+	
+	private void saveCustomer() {
+		// On click of the save button
+		// Read data from the fields and store it in the model
+		// Create an object of Business Layer and pass the model to business layer
+		// Perform the required action from the business layer.
+		try {
+			Customer customer = new Customer();
+			customer.setFirstName(siFirstTextField.getText());
+			customer.setLastName(siLastTextField.getText());
+			
+			CustomerServiceLayer CustomerSL = new CustomerServiceLayer();
+			CustomerSL.setCustomer(customer);
+			customer = CustomerSL.customerSave(customer);
+		}
+		catch(InputException ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+	}
 }
+	

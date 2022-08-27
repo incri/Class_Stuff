@@ -2,17 +2,23 @@ package DatabaseLayer;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
+
+import javax.swing.JOptionPane;
 
 import Helper.DatabaseConnector;
 import Models.Users;
+import FrontendLayer.AdminPage;
+import FrontendLayer.LogInBox;
+
+import FrontendLayer.UserHomePage;
 
 public class UserDatabaseLayer {
 
+	public static int primkey = 0;
 	private Users user;
 	private DatabaseConnector db;
 	private Connection connection;
@@ -39,113 +45,141 @@ public class UserDatabaseLayer {
 		this.user = user;
 	}
 	
-	public Users save() throws Exception {
+	
+	//user login method
+	
+	public Users userLogIn() throws Exception {
+		
+		PreparedStatement customerStatement;
+		PreparedStatement adminStatement;
+		ResultSet crs;
+		ResultSet ars;
+		
+		
+		//getting email and password from the login page
+		
+		// query to check if the username and password exist in data base or not
+		
+		String customerQuery = "SELECT * FROM Users WHERE userName = ? AND password = ? AND userType is NULL  ";
+		String adminQuery = "SELECT * FROM Users WHERE userName = ? AND password = ? AND userType = 'receptionist' ";
+		
 		try {
-			// prepare for the data to be returned in case of insert
-			String generatedColumns[] = {"userID","email", "userName", "password"};
-			// create the statement
-			String query = "INSERT INTO Users(email, userName, password) VALUES(?,?,?)";
-			PreparedStatement statement = this.connection.prepareStatement(query, generatedColumns);
-			statement.setString(1, this.user.getEmail());
-			statement.setString(2, this.user.getUserName());
-			statement.setString(3, this.user.getPassword());
-			// execute the query
-			int noOfUpdate = statement.executeUpdate();
-			if(noOfUpdate>0) {
-				ResultSet rs = statement.getGeneratedKeys();
-				if(rs.next()) {
-					int userID = rs.getInt(1);
-					rs.getString(2);
-					this.user.setUserID(userID);
-				}	
+			
+			customerStatement = this.connection.prepareStatement(customerQuery);
+			customerStatement.setString(1, this.user.getUserName());
+			customerStatement.setString(2, this.user.getPassword());
+			
+			
+			adminStatement = this.connection.prepareStatement(adminQuery);
+			adminStatement.setString(1, this.user.getUserName());
+			adminStatement.setString(2, this.user.getPassword());
+			
+			
+			
+			crs = customerStatement.executeQuery();
+			ars = adminStatement.executeQuery();
+			
+			//condition if the username and password match
+			if (crs.next())
+			{
+				//take user to user home page
+				UserHomePage homePage = new UserHomePage();
+				homePage.setVisible(true);
+				homePage.pack();
+				homePage.setLocationRelativeTo(null);
 			}
-			return this.user;
-		}catch(Exception ex) {
-			throw ex;
-		}
-	}
-	
-	public Users update() throws Exception {
-		try {
-			// create the statement
-			String query = "UPDATE Users  SET email=? , userName=?, password=?, WHERE userID=?";
-			PreparedStatement statement = this.connection.prepareStatement(query);
-			statement.setString(1, this.user.getEmail());
-			statement.setString(2, this.user.getUserName());
-			statement.setString(3, this.user.getPassword());
-			statement.setInt(4, user.getUserID());
-			// execute the query
-			statement.executeUpdate();
-			return this.user;
-		}catch(Exception ex) {
-			throw ex;
-		}
-	}
-	
-	public void delete() throws Exception {
-		try {
-			// create the statement
-			String query = "DELETE FROM Users WHERE userID=?";
-			PreparedStatement statement = this.connection.prepareStatement(query);
-			statement.setInt(1, user.getUserID());
-			// execute the query
-			statement.executeUpdate();
-		}catch(Exception ex) {
-			throw ex;
-		}
-	}
-	
-	public ArrayList<Users> getAllUser() throws Exception {
-		try {
-			ArrayList<Users> users = new ArrayList<Users>();
-			String query = "SELECT * FROM Users ORDER BY userName";
-			Statement statement = this.connection.createStatement();
-			ResultSet rs = statement.executeQuery(query);
-			while(rs.next()) {
-				Users u = new Users();
-				u.setUserID(rs.getInt("userID"));
-				u.setEmail(rs.getString("email"));
-				u.setUserName(rs.getString("userName"));
-				u.setPassword(rs.getString("password"));
-				users.add(u);
+			
+			else if (ars.next())
+			{
+				//take user to user home page
+				AdminPage adminPage = new AdminPage();
+				adminPage.setVisible(true);
+				adminPage.pack();
+				adminPage.setLocationRelativeTo(null);
 			}
-			return users;
-		}
-		catch(Exception ex) {
+			else {
+				JOptionPane.showMessageDialog(null, "Invalid User name password", "Log In Error", 2);
+			}
+			
+			
+		}catch(Exception ex) {
 			throw ex;
 		}
+		
+		
+		return user;
 	}
 	
-	public ArrayList<Users> searchUser(String[] keys, String[] values) throws Exception{
-		// SELECT * FROM user WHERE name LIKE '%Hari%' AND address LIKE '%PCPS%' ;
-		ArrayList<Users> users = new ArrayList<Users>();
+	//to check if the user name is already exists
+	
+	public boolean checkUsername(String username, String email) throws Exception {
+		PreparedStatement statement;
+		ResultSet rs;
+		boolean username_exist = false;
+		boolean email_exist = false;
+		
+		String query = "SELECT * FROM Users WHERE username = ? AND email = ? ";
+		
 		try {
-			int keyLength = keys.length;
-			String where = "";
-			for(int i=0; i<keyLength; ++i) {
-				if(i==0) {
-					where = where+" WHERE "+ keys[i]+" LIKE '%"+values[i]+"%' ";
-				}else {
-					where = where+" AND "+ keys[i]+" LIKE '%"+values[i]+"%' ";
+			statement = this.connection.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, email);
+			rs = statement.executeQuery();
+			
+			if (rs.next()) {
+				username_exist = true;
+				JOptionPane.showMessageDialog(null, "This username is already taken, Choose another username","Username Invalid",2);
+			}
+			if (rs.next()) {
+				email_exist = true;
+				JOptionPane.showMessageDialog(null, "Account already created , Please LogIn","Email already used",2);
+			}
+		}catch(Exception ex) {
+			throw ex;
+		}
+		return username_exist;
+	}
+	
+	public Users userSave() throws Exception {
+		
+		if((!checkUsername(user.getUserName(), user.getEmail()))) {
+			PreparedStatement statement;
+			ResultSet rs;
+			String registerUserQuery = "INSERT INTO Users (email, userName, password) VALUES (?,?,?)";
+		try {
+			
+				String[] userID = new String[] { "id" };
+				
+				statement = this.connection.prepareStatement(registerUserQuery, userID);
+				statement.setString(1, this.user.getEmail());
+				statement.setString(2, this.user.getUserName());
+				statement.setString(3, this.user.getPassword());
+				
+				try {
+					
+					if (statement.executeUpdate() !=0) {
+						
+						ResultSet generatedKeys = statement.getGeneratedKeys();
+						 if ( generatedKeys.next() ) {
+				                primkey = generatedKeys.getInt(1);
+				            }
+						JOptionPane.showMessageDialog(null, "Your Account has been created ");
+					}
+					else {
+						JOptionPane.showInternalMessageDialog(null, "Please Check Your Information");
+					}
+			
+				} catch (Exception ex) {
+					throw ex;
 				}
-			}
-			String query = "SELECT * FROM Users"+where+" ORDER BY userName";
-			Statement statement = this.connection.createStatement();
-			ResultSet rs = statement.executeQuery(query);
-			while(rs.next()) {
-				Users u = new Users();
-				u.setUserID(rs.getInt("userID"));
-				u.setEmail(rs.getString("email"));
-				u.setUserName(rs.getString("userName"));
-				u.setPassword(rs.getNString("password"));
-				users.add(u);
-			}
-		} catch (SQLException e) {
-			throw new Exception(e.getMessage());
+		
+		
+		} catch (Exception ex) {
+			throw ex;
 		}
-		return users;		
 	}
+		return user;
 }
 
-
-
+	
+}

@@ -1,56 +1,61 @@
 package Models;
 
 public class Administration {
-	private int userID;
-	private String email;
-	private String userName;
-	private String password;
+	private int adminID;
+	private String contact;
+	private String firstName;
+	private String lastName;
+	
+	
 	
 	public Administration() {
-		this.userID = 0;
-		this.email = "";
-		this.userName = "";
-		this.password= "";
+		this.adminID = 0;
+		this.contact= "";
+		this.firstName = "";
+		this.lastName = "";
+		
 	}
 	
-	public Administration(int id, String email, String userName, String password ) {
-		this.userID = id;
-		this.email = email;
-		this.userName = userName;
-		this.password = password;
+	public Administration(int id, String contact, String firstName, String lastName ) {
+		this.adminID = id;
+		this.contact = contact;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		
 	}
 
-	public int getUserID() {
-		return userID;
+	public int getAdminID() {
+		return adminID;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setAdminID(int adminID) {
+		this.adminID = adminID;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	
 }
+	
