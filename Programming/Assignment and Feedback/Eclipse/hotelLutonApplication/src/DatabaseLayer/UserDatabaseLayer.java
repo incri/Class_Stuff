@@ -5,11 +5,13 @@ import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import Helper.DatabaseConnector;
+import Models.Room;
 import Models.Users;
 import FrontendLayer.AdminPage;
 import FrontendLayer.LogInBox;
@@ -18,10 +20,14 @@ import FrontendLayer.UserHomePage;
 
 public class UserDatabaseLayer {
 
-	public static int primkey = 0;
 	private Users user;
 	private DatabaseConnector db;
 	private Connection connection;
+	public static int userPrimeKey;
+	public static int cusPrimeKey;
+	public static int adminPrimeKey;
+	public static int PrimKey;
+	
 	
 	public UserDatabaseLayer() {
 		this.user = new Users();
@@ -60,8 +66,8 @@ public class UserDatabaseLayer {
 		
 		// query to check if the username and password exist in data base or not
 		
-		String customerQuery = "SELECT * FROM Users WHERE userName = ? AND password = ? AND userType is NULL  ";
-		String adminQuery = "SELECT * FROM Users WHERE userName = ? AND password = ? AND userType = 'receptionist' ";
+		String customerQuery = "SELECT u.userID, c.cusID FROM Users u INNER JOIN Customer c  ON u.userID  = c.userID WHERE u.userName = ? AND u.password = ? AND u.userType is NULL ";
+		String adminQuery = "SELECT u.userID, a.adminID FROM Users u INNER JOIN Administration a  ON u.userID = a.userID WHERE u.userName = ? AND u.password = ? AND u.userType = 'receptionist'";
 		
 		try {
 			
@@ -83,10 +89,15 @@ public class UserDatabaseLayer {
 			if (crs.next())
 			{
 				//take user to user home page
+				
+				userPrimeKey = crs.getInt(2);
+				cusPrimeKey = crs.getInt(2);
 				UserHomePage homePage = new UserHomePage();
 				homePage.setVisible(true);
 				homePage.pack();
 				homePage.setLocationRelativeTo(null);
+				
+				
 			}
 			
 			else if (ars.next())
@@ -96,9 +107,11 @@ public class UserDatabaseLayer {
 				adminPage.setVisible(true);
 				adminPage.pack();
 				adminPage.setLocationRelativeTo(null);
+				
+				adminPrimeKey = ars.getInt(1);
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Invalid User name password", "Log In Error", 2);
+				JOptionPane.showMessageDialog(null, "Invalid User name / password", "Log In Error", 2);
 			}
 			
 			
@@ -144,25 +157,25 @@ public class UserDatabaseLayer {
 		
 		if((!checkUsername(user.getUserName(), user.getEmail()))) {
 			PreparedStatement statement;
-			ResultSet rs;
-			String registerUserQuery = "INSERT INTO Users (email, userName, password) VALUES (?,?,?)";
+			String registerUserQuery = "INSERT INTO Users (email, userName, password, userID) VALUES (?,?,?,?)";
 		try {
 			
-				String[] userID = new String[] { "id" };
+			String generatedID[] = {"id"};
 				
-				statement = this.connection.prepareStatement(registerUserQuery, userID);
+				statement = this.connection.prepareStatement(registerUserQuery, generatedID);
 				statement.setString(1, this.user.getEmail());
 				statement.setString(2, this.user.getUserName());
 				statement.setString(3, this.user.getPassword());
+				statement.setInt(4,UserDatabaseLayer.userPrimeKey);
 				
 				try {
 					
 					if (statement.executeUpdate() !=0) {
 						
 						ResultSet generatedKeys = statement.getGeneratedKeys();
-						 if ( generatedKeys.next() ) {
-				                primkey = generatedKeys.getInt(1);
-				            }
+						if ( generatedKeys.next() ) {
+			                PrimKey = generatedKeys.getInt(1);
+			            }
 						JOptionPane.showMessageDialog(null, "Your Account has been created ");
 					}
 					else {

@@ -21,16 +21,13 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JDesktopPane;
 
 @SuppressWarnings("serial")
 public class AdminPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTable userDatatable;
 
-	/**
-	 * Launch the application.
-	 */
 
 	/**
 	 * Create the frame.
@@ -43,9 +40,9 @@ public class AdminPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JLabel apLogoLabel = new JLabel("");
-		Image logo = new ImageIcon(this.getClass().getResource("/LOGO2.png")).getImage();
-		apLogoLabel.setIcon(new ImageIcon(logo));
+		apLogoLabel.setIcon(new ImageIcon("/home/vivu/Class_Stuff/Programming/Assignment and Feedback/Eclipse/hotelLutonApplication/Img/LOGO2.png"));
 		apLogoLabel.setBounds(340, 12, 90, 80);
 		contentPane.add(apLogoLabel);
 		
@@ -60,9 +57,20 @@ public class AdminPage extends JFrame {
 		contentPane.add(upperButtonPanel);
 		upperButtonPanel.setLayout(null);
 		
+		JDesktopPane lowerDesktopPane = new JDesktopPane();
+		lowerDesktopPane.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		lowerDesktopPane.setBounds(12, 199, 704, 436);
+		contentPane.add(lowerDesktopPane);
+		
 		JButton apBtnUsersDetails = new JButton("Users");
 		apBtnUsersDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				UserDetailsTable userTable = new UserDetailsTable();
+				
+				userTable.loadAllUser();
+				lowerDesktopPane.add(userTable);
+				userTable.setVisible(true);
 				
 				
 			}
@@ -80,6 +88,17 @@ public class AdminPage extends JFrame {
 		detailSearchTextField.setColumns(10);
 		
 		JButton btnRoomDetails = new JButton("Rooms");
+		btnRoomDetails.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				lowerDesktopPane.removeAll();
+				RoomDetailsTable roomTable = new RoomDetailsTable();
+				roomTable.setVisible(true);
+				lowerDesktopPane.add(roomTable);
+				roomTable.loadAllRoom();
+				
+			}
+		});
 		btnRoomDetails.setBounds(155, 12, 123, 27);
 		upperButtonPanel.add(btnRoomDetails);
 		
@@ -91,14 +110,29 @@ public class AdminPage extends JFrame {
 		btnPayment.setBounds(450, 12, 105, 27);
 		upperButtonPanel.add(btnPayment);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 223, 841, 412);
-		scrollPane.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		contentPane.add(scrollPane);
+		JDesktopPane sideDesktopPane = new JDesktopPane();
+		sideDesktopPane.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		sideDesktopPane.setBounds(839, 263, 405, 372);
+		contentPane.add(sideDesktopPane);
 		
-		userDatatable = new JTable();
-		userDatatable.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		scrollPane.setViewportView(userDatatable);
+		JButton addRoomButton = new JButton("Add Rooms");
+		addRoomButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sideDesktopPane.removeAll();
+				AddRoomPage addRoom = new AddRoomPage();
+				addRoom.setVisible(true);
+				sideDesktopPane.add(addRoom);
+			}
+		});
+		addRoomButton.setBounds(839, 224, 116, 27);
+		contentPane.add(addRoomButton);
+		
+		JButton roomAsignButton = new JButton("Assign Room");
+		roomAsignButton.setBounds(989, 224, 128, 27);
+		contentPane.add(roomAsignButton);
+		
+		
+		
 		
 		
 		

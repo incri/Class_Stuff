@@ -1,21 +1,23 @@
 package FrontendLayer;
 
-import javax.swing.ImageIcon;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import java.awt.Color;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
 import Helper.InputException;
@@ -39,6 +41,12 @@ public class LogInBox extends JInternalFrame {
 		setClosable(true);
 		setBounds(0, 0, 560, 571);
 		getContentPane().setLayout(null);
+		setVisible(true);
+		
+		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+		for(MouseListener listener: basicInternalFrameUI.getNorthPane().getMouseListeners()){
+			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+		}
 		
 		JLabel logTitle = new JLabel("LOGIN TO LUTON");
 		logTitle.setFont(new Font("Dialog", Font.BOLD, 28));
@@ -46,8 +54,7 @@ public class LogInBox extends JInternalFrame {
 		getContentPane().add(logTitle);
 		
 		JLabel liLogoLabel = new JLabel("");
-		Image logo = new ImageIcon(this.getClass().getResource("/LOGO2.png")).getImage();
-		liLogoLabel.setIcon(new ImageIcon(logo));
+		liLogoLabel.setIcon(new ImageIcon("/home/vivu/Class_Stuff/Programming/Assignment and Feedback/Eclipse/hotelLutonApplication/Img/LOGO2.png"));
 		liLogoLabel.setBounds(43, 0, 90, 80);
 		getContentPane().add(liLogoLabel);
 		
@@ -86,10 +93,12 @@ public class LogInBox extends JInternalFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				userLogIn();
+				
 			}
 		});
 		btnLogin.setBounds(117, 262, 105, 27);
 		logInPanel.add(btnLogin);	
+		
 		
 	}
 	public JTextField getLiUserNameTextField() {

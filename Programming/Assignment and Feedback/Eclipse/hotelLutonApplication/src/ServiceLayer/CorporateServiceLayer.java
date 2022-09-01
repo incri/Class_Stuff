@@ -21,15 +21,6 @@ public class CorporateServiceLayer {
 		return corporate;
 	}
 
-	public void setCorporate(Corporate corporate) throws InputException {
-		try {
-			if(this.ValidateCorporate(corporate)) {
-				this.corporate = corporate;
-			}
-		}catch(InputException ex) {
-			throw ex;
-		}
-	}
 	
 public boolean ValidateCorporate(Corporate corporate) throws InputException {
 		

@@ -1,5 +1,6 @@
 package Base;
 
+import FrontendLayer.UserDetailsTable;
 import FrontendLayer.WelcomePage;
 
 public class Main {

@@ -45,21 +45,21 @@ public class CorporateDatabaseLayer {
 	public Corporate corporateSave() throws Exception {
 		PreparedStatement statement;
 		ResultSet rs;
-		String registerCorporateQuery = "INSERT INTO Corporate (companyName, companyContact, userID) VALUES (?,?,?)";
+		String registerCorporateQuery = "INSERT INTO Corporate (companyName, companyContact, userID, cusID) VALUES (?,?,?,?)";
 	try {
 		
 			statement = this.connection.prepareStatement(registerCorporateQuery);
 			statement.setString(1, this.corporate.getCompanyName());
 			statement.setString(2, this.corporate.getCompanyContact());
-			statement.setInt(3, UserDatabaseLayer.primkey);
+			statement.setInt(3, UserDatabaseLayer.PrimKey);
+			statement.setInt(4, CustomerDatabaseLayer.PrimKey);
 			
 			try {
 				
 				if (statement.executeUpdate() !=0) {
-				}
-				else {
 					
 				}
+			
 		
 			} catch (Exception ex) {
 				throw ex;

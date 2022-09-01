@@ -20,15 +20,6 @@ public class CustomerServiceLayer {
 		return customer;
 	}
 	
-	public void setCustomer(Customer customer) throws InputException {
-		try {
-			if(this.ValidateCustomer(customer)) {
-				this.customer = customer;
-			}
-		}catch(InputException ex) {
-			throw ex;
-		}
-	}
 	
 	
 	//LogInBox validation

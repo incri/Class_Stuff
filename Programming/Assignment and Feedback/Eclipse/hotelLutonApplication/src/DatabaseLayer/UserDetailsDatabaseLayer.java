@@ -5,34 +5,29 @@ import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
-
-
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 import Helper.DatabaseConnector;
-import Models.Corporate;
-import Models.Customer;
+import Models.UserDetails;
 import Models.Users;
 
 
 public class UserDetailsDatabaseLayer {
 
-	private Customer customer;
-	private Corporate corporate;
-	private Users user;
+	private UserDetails userDetails;
 	private DatabaseConnector db;
 	private Connection connection;
+	public ResultSetMetaData rsmd;
 	
 	public UserDetailsDatabaseLayer() {
-		this.customer = new Customer();
-		this.corporate = new Corporate();
-		this.user = new Users();
+		this.userDetails = new UserDetails();
 	}
 	
-	public UserDetailsDatabaseLayer(Customer customer, Corporate corporate, Users user) throws Exception {
-		this.customer = customer;
-		this.corporate = corporate;
-		this.user = user;
+	public UserDetailsDatabaseLayer(UserDetails userDetails) throws Exception {
+		this.userDetails = userDetails;
 		try{
 		this.db = DatabaseConnector.getInstance();
 		this.connection = this.db.getConnection();
@@ -41,61 +36,41 @@ public class UserDetailsDatabaseLayer {
 		}
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public UserDetails getuserDetails() {
+		return userDetails;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setuserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 	
-	
-	
-	public Corporate getCorporate() {
-		return corporate;
-	}
-
-	public void setCorporate(Corporate corporate) {
-		this.corporate = corporate;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
-	
-	public Customer customerSave() throws Exception {
-		PreparedStatement statement;
-		ResultSet rs;
-		String registerCustomerQuery = "INSERT INTO Customer (firstName, lastName, userID) VALUES (?,?,?)";
-	try {
+	public ArrayList<UserDetails> getAllUserDetails() throws Exception {
 		
-			statement = this.connection.prepareStatement(registerCustomerQuery);
-			statement.setString(1, this.customer.getFirstName());
-			statement.setString(2, this.customer.getLastName());
-			statement.setInt(3, UserDatabaseLayer.primkey);
+		try {
+			ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>();
+			String userDetailsQuery = "SELECT u.userID, c.cusID, CONCAT(c.firstName,c.lastName) AS Name, u.email, c2.corpID, c2.companyName, c2.companyContact FROM Users u  JOIN Customer c  ON u.userID  = c.userID JOIN Corporate c2 ON u.userID = c2.userID ORDER BY u.userID ";
+			Statement statement = this.connection.createStatement();
+			ResultSet rs = statement.executeQuery(userDetailsQuery);
 			
-			try {
-				
-				if (statement.executeUpdate() !=0) {
-				}
-				else {
-					
-				}
-		
-			} catch (Exception ex) {
-				throw ex;
+	
+			while(rs.next()) {
+				UserDetails ud = new UserDetails();
+				ud.setUserID(rs.getInt(1));
+				ud.setCusID(rs.getInt(2));
+				ud.setName(rs.getString(3));
+				ud.setEmail(rs.getString(4));
+				ud.setCorpID(rs.getInt(5));
+				ud.setCorporateName(rs.getString(5));
+				ud.setCorporateContact(rs.getString(7));
+				userDetails.add(ud);
 			}
-	
-	
-	} catch (Exception ex) {
-		throw ex;
+			//rsmd = (ResultSetMetaData) rs.getMetaData();
+			return userDetails;
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
 	}
-	return customer;
 }
-}
+	
 	

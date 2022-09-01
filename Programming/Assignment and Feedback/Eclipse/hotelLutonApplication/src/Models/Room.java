@@ -1,11 +1,13 @@
 package Models;
 
+
+
 public class Room {
 	private int roomNo;
-	private String roomType;
+	private Object roomType;
 	private String pricePerNight;
 	private String roomDetails;
-	private String roomStatus;
+	private Object roomStatus;
 	
 	public Room() {
 		this.roomNo = 0;
@@ -15,7 +17,7 @@ public class Room {
 		this.roomStatus ="";
 	}
 	
-	public Room(int roomNo, String roomType, String pricePerNight, String roomDetails, String roomStatus) {
+	public Room(int roomNo, Object roomType, String pricePerNight, String roomDetails, Object roomStatus) {
 		this.roomNo = roomNo;
 		this.roomType = roomType;
 		this.pricePerNight = pricePerNight;
@@ -31,12 +33,12 @@ public class Room {
 		this.roomNo = roomNo;
 	}
 
-	public String getRoomType() {
+	public Object getRoomType() {
 		return roomType;
 	}
 
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
+	public void setRoomType(Object object) {
+		this.roomType = object;
 	}
 
 	public String getPricePerNight() {
@@ -55,13 +57,14 @@ public class Room {
 		this.roomDetails = roomDetails;
 	}
 
-	public String getRoomStatus() {
+	public Object getRoomStatus() {
 		return roomStatus;
 	}
 
-	public void setRoomStatus(String roomStatus) {
-		this.roomStatus = roomStatus;
+	public void setRoomStatus(Object object) {
+		this.roomStatus = object;
 	}
+	
 	
 	
 }

@@ -4,46 +4,41 @@ import java.util.Date;
 
 public class GuestData {
 	private int guestID;
-	private String firstNAme;
-	private String lastName;
-	private Date dOB;
+	private String fullName;
+	private String dOB;
 	private String country;
 	private String state;
 	private String city;
-	private int postalCode;
-	private Date checkInDate;
-	private Date checkOutDate;
-	private int contact;
+	private String checkInDate;
+	private String checkOutDate;
+	private String contact;
 	private String roomPreference;
+	
 
 	
 	
 	public GuestData() {
 		this.guestID = 0;
-		this.firstNAme = "";
-		this.lastName = "";
-		this.dOB= null;
+		this.fullName = "";
+		this.dOB= "";
 		this.country = "";
 		this.state = "";
 		this.city= "";
-		this.postalCode = 0;
-		this.checkInDate = null;
-		this.checkOutDate= null;
-		this.contact = 0;
+		this.checkInDate = "";
+		this.checkOutDate= "";
+		this.contact = "";
 		this.roomPreference= "";
 	}
 	
-	public GuestData(int guestID, String firstNAme, String lastName, Date dOB,
-			String country, String state, String city, int postalCode,
-			Date checkInDate, Date checkOutDate, int contact, String roomPreference) {
+	public GuestData(int guestID, String fullName, String dOB,
+			String country, String state, String city, 
+			String checkInDate, String checkOutDate, String contact, String roomPreference) {
 		this.guestID = guestID;
-		this.firstNAme = firstNAme;
-		this.lastName = lastName;
+		this.fullName= fullName;
 		this.dOB= dOB;
 		this.country = country;
 		this.state = state;
 		this.city= city;
-		this.postalCode = postalCode;
 		this.checkInDate = checkInDate;
 		this.checkOutDate= checkOutDate;
 		this.contact = contact;
@@ -58,27 +53,20 @@ public class GuestData {
 		this.guestID = guestID;
 	}
 
-	public String getFirstNAme() {
-		return firstNAme;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstNAme(String firstNAme) {
-		this.firstNAme = firstNAme;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Date getdOB() {
+	public String getdOB() {
 		return dOB;
 	}
 
-	public void setdOB(Date dOB) {
+	public void setdOB(String dOB) {
 		this.dOB = dOB;
 	}
 
@@ -106,35 +94,28 @@ public class GuestData {
 		this.city = city;
 	}
 
-	public int getPostalCode() {
-		return postalCode;
-	}
 
-	public void setPostalCode(int postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public Date getCheckInDate() {
+	public String getCheckInDate() {
 		return checkInDate;
 	}
 
-	public void setCheckInDate(Date checkInDate) {
+	public void setCheckInDate(String checkInDate) {
 		this.checkInDate = checkInDate;
 	}
 
-	public Date getCheckOutDate() {
+	public String getCheckOutDate() {
 		return checkOutDate;
 	}
 
-	public void setCheckOutDate(Date checkOutDate) {
+	public void setCheckOutDate(String checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 

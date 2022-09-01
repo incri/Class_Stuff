@@ -75,7 +75,7 @@ public class BLUser {
 	public ArrayList<Users> getAllUser() throws Exception {
 		try {
 			DLUser dlUser = new DLUser(this.user);
-			return dlUser.getAllUser();
+			return dlUser.loadUser();
 		}catch(Exception e) {
 			throw e;
 		}

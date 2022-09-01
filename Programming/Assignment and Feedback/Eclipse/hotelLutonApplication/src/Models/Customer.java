@@ -3,29 +3,29 @@ package Models;
 
 
 public class Customer {
-	private int cusID;
+	private static int cusID;
 	private String firstName;
 	private String lastName;
 	
 	public Customer() {
-		this.cusID = 0;
+		Customer.cusID = 0;
 		this.firstName = "";
 		this.lastName = "";
 	}
 	
-	public Customer(int cusID, String firstName, String lastName, String dOB) {
-		this.cusID = cusID;
+	public Customer(int cusID, String firstName, String lastName) {
+		Customer.cusID = cusID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 
 	}
 
-	public int getCusID() {
+	public static int getCusID() {
 		return cusID;
 	}
 
 	public void setCusID(int cusID) {
-		this.cusID = cusID;
+		Customer.cusID = cusID;
 	}
 
 	public String getFirstName() {

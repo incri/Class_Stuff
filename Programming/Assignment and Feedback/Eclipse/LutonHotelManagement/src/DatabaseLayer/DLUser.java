@@ -98,8 +98,7 @@ public class DLUser {
 		}
 	}
 	
-	public ArrayList<Users> 
-	() throws Exception {
+	public ArrayList<Users> loadUser() throws Exception {
 		try {
 			ArrayList<Users> users = new ArrayList<Users>();
 			String query = "SELECT * FROM user ORDER BY name";

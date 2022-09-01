@@ -58,9 +58,11 @@ public class WelcomePage extends JFrame {
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 22));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				externalDesktopPane.removeAll();
 				LogInBox logIn = new LogInBox();
 				logIn.setVisible(true);
 				externalDesktopPane.add(logIn);
+				
 			}
 		});
 		btnNewButton.setBounds(482, 178, 194, 69);
@@ -69,9 +71,12 @@ public class WelcomePage extends JFrame {
 		JButton btnSignup = new JButton("SIGNUP");
 		btnSignup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				externalDesktopPane.removeAll();
 				SignUpBox signUp = new SignUpBox();
 				signUp.setVisible(true);
 				externalDesktopPane.add(signUp);
+				
 			}
 		});
 		
@@ -89,14 +94,12 @@ public class WelcomePage extends JFrame {
 		contentPane.add(btnGallery);
 		
 		JLabel logoLabel = new JLabel("");
-		Image logo = new ImageIcon(this.getClass().getResource("/LOGO.png")).getImage();
-		logoLabel.setIcon(new ImageIcon(logo));
+		logoLabel.setIcon(new ImageIcon("/home/vivu/Class_Stuff/Programming/Assignment and Feedback/Eclipse/hotelLutonApplication/Img/LOGO.png"));
 		logoLabel.setBounds(52, 12, 135, 115);
 		contentPane.add(logoLabel);
 		
 		JLabel WallpapperLabel = new JLabel("");
-		Image wallpaper = new ImageIcon(this.getClass().getResource("/HotelWallpaper.jpg")).getImage();
-		WallpapperLabel.setIcon(new ImageIcon(wallpaper));
+		WallpapperLabel.setIcon(new ImageIcon("/home/vivu/Class_Stuff/Programming/Assignment and Feedback/Eclipse/hotelLutonApplication/Img/HotelWallpaper.jpg"));
 		WallpapperLabel.setBackground(Color.WHITE);
 		WallpapperLabel.setBounds(12, 12, 1256, 623);
 		contentPane.add(WallpapperLabel);

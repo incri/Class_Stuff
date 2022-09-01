@@ -5,11 +5,14 @@ import java.awt.Color;
 
 
 
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -20,10 +23,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import Helper.InputException;
+import Models.Corporate;
 import Models.Customer;
 import Models.Users;
+import ServiceLayer.CorporateServiceLayer;
 import ServiceLayer.CustomerServiceLayer;
 import ServiceLayer.UserServiceLayer;
 import javax.swing.JCheckBox;
@@ -36,23 +42,30 @@ public class SignUpBox extends JInternalFrame {
 	private JPasswordField siPasswordPassField;
 	private JPasswordField siConfirmPasswordPassField;
 	public JCheckBox corporateCheckBox;
+	public JDesktopPane coDesktopPane;
 	/**
 	 * Create the frame.
 	 */
 	public SignUpBox() {
 		setTitle("SignUpBox");
+		setVisible(true);
 		setClosable(true);
 		setBounds(0, 0, 560, 571);
 		getContentPane().setLayout(null);
 		
+		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+		for(MouseListener listener: basicInternalFrameUI.getNorthPane().getMouseListeners()){
+			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+			
+		}
+		
 		JLabel signTitle = new JLabel("REGISTER TO LUTON");
 		signTitle.setFont(new Font("Dialog", Font.BOLD, 28));
 		signTitle.setBounds(145, 26, 292, 31);
-		getContentPane().add(signTitle);
+		getContentPane().add(signTitle);		
 		
 		JLabel siLogoLabel = new JLabel("");
-		Image logo = new ImageIcon(this.getClass().getResource("/LOGO2.png")).getImage();
-		siLogoLabel.setIcon(new ImageIcon(logo));
+		siLogoLabel.setIcon(new ImageIcon("/home/vivu/Class_Stuff/Programming/Assignment and Feedback/Eclipse/hotelLutonApplication/Img/LOGO2.png"));
 		siLogoLabel.setBounds(31, 12, 90, 80);
 		getContentPane().add(siLogoLabel);
 		
@@ -123,15 +136,13 @@ public class SignUpBox extends JInternalFrame {
 		signInPanel.add(btnSignup);
 		btnSignup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				saveUser();
-				saveCustomer();
-				CorporateBox.saveCorporate();
+				register();
 			}
 		});
 		
 		
+		coDesktopPane = new JDesktopPane();
 		
-		JDesktopPane coDesktopPane = new JDesktopPane();
 		coDesktopPane.setBackground(SystemColor.scrollbar);
 		coDesktopPane.setBounds(218, 278, 296, 117);
 		signInPanel.add(coDesktopPane);
@@ -144,6 +155,7 @@ public class SignUpBox extends JInternalFrame {
 		btnCorporateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(corporateCheckBox.isSelected()) {
+					coDesktopPane.removeAll();
 					CorporateBox corporate = new CorporateBox();
 					corporate.setVisible(true);
 					coDesktopPane.add(corporate);
@@ -168,7 +180,7 @@ public class SignUpBox extends JInternalFrame {
 	
 	
 	
-	private void saveUser() {
+	private void register() {
 		// On click of the save button
 		// Read data from the fields and store it in the model
 		// Create an object of Business Layer and pass the model to business layer
@@ -179,9 +191,34 @@ public class SignUpBox extends JInternalFrame {
 			user.setUserName(siUsersNameTextField.getText());
 			user.setPassword(String.valueOf(siPasswordPassField.getPassword()));
 			
-			UserServiceLayer UserSL = new UserServiceLayer();
-			UserSL.setUser(user);
-			user = UserSL.userSave(user);
+			Customer customer = new Customer();
+			customer.setFirstName(siFirstTextField.getText());
+			customer.setLastName(siLastTextField.getText());
+			
+			
+			
+			UserServiceLayer userSL = new UserServiceLayer();
+			CustomerServiceLayer customerSL = new CustomerServiceLayer();
+			CorporateServiceLayer corporateSL = new CorporateServiceLayer();
+			
+			if(corporateCheckBox.isSelected()) {
+				
+				Corporate corporate = new Corporate();
+				corporate.setCompanyName(CorporateBox.CCompanyNameTextField.getText());
+				corporate.setCompanyContact(CorporateBox.CCompanyContactTextField.getText());
+				
+				if(userSL.ValidateSignup(user) && customerSL.ValidateCustomer(customer) && corporateSL.ValidateCorporate(corporate))  {
+					user = userSL.userSave(user);
+					customer = customerSL.customerSave(customer);
+					corporate = corporateSL.corporateSave(corporate);
+				}
+			}
+			 else {
+				if(userSL.ValidateSignup(user) && customerSL.ValidateCustomer(customer))  {
+					user = userSL.userSave(user);
+					customer = customerSL.customerSave(customer);
+				}
+			}
 		}
 		catch(InputException ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -191,26 +228,6 @@ public class SignUpBox extends JInternalFrame {
 		}
 	}
 	
-	private void saveCustomer() {
-		// On click of the save button
-		// Read data from the fields and store it in the model
-		// Create an object of Business Layer and pass the model to business layer
-		// Perform the required action from the business layer.
-		try {
-			Customer customer = new Customer();
-			customer.setFirstName(siFirstTextField.getText());
-			customer.setLastName(siLastTextField.getText());
-			
-			CustomerServiceLayer CustomerSL = new CustomerServiceLayer();
-			CustomerSL.setCustomer(customer);
-			customer = CustomerSL.customerSave(customer);
-		}
-		catch(InputException ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage());
-		}
-		catch(Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage());
-		}
 	}
-}
+
 	

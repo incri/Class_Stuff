@@ -19,20 +19,27 @@ public class UserServiceLayer {
 		return user;
 	}
 
-	public void setUser(Users user) throws InputException {
-		try {
-			if(this.ValidateLogIn(user)) {
-				this.user = user;
-			}
-		}catch(InputException ex) {
-			throw ex;
-		}
-	}
 	
 	
 	//LogInBox validation
 	public boolean ValidateLogIn(Users user) throws InputException {
 		
+		if(user.getUserName() == null || user.getUserName().length() == 0) {
+			throw new InputException("User name cannot be empty.");
+		}
+		if(user.getPassword() == null || user.getPassword().length() == 0) {
+			throw new InputException("Password cannot be empty.");
+		}
+		
+		return true;
+	}
+	
+public boolean ValidateSignup(Users user) throws InputException {
+	
+		if(user.getEmail() == null || user.getEmail().length() == 0) {
+			throw new InputException("Email name cannot be empty.");
+		}
+
 		if(user.getUserName() == null || user.getUserName().length() == 0) {
 			throw new InputException("User name cannot be empty.");
 		}

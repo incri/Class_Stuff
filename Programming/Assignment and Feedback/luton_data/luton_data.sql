@@ -24,7 +24,8 @@ CREATE TABLE Corporate(
 corpID INT PRIMARY KEY AUTO_INCREMENT,
 companyName VARCHAR(50) NOT NULL,
 companyContact VARCHAR(20) NOT NULL,
-userID INT NOT NULL
+userID INT NOT NULL,
+cusID INT NOT NULL
 
 )
 
@@ -40,20 +41,22 @@ userID INT NOT NULL
 INSERT INTO Administration (adminID, contact, firstName, lastName, userID)
 VALUES (1, '984532157', 'Henry', 'smith', 1)
 
+
+CREATE TABLE Guest(
 guestID INT PRIMARY KEY AUTO_INCREMENT,
-fIrstName VARCHAR(50) NOT NULL,
-lastName VARCHAR(50) NOT NULL,
+fullName VARCHAR(50) NOT NULL,
 dOB DATE NOT NULL,
+contact VARCHAR(20) NOT NULL,
+roomPreference VARCHAR(50) NOT NULL,
 country VARCHAR(20) NOT NULL,
 state VARCHAR(50) NOT NULL,
 city VARCHAR(50) NOT NULL,
-postalCode INT NOT NULL,
 checkInDate DATE NOT NULL,
 checkOutDate DATE NOT NULL,
-contact INT NOT NULL,
-roomPreference VARCHAR(10) NOT NULL
+cusID INT NOT NULL
 
 )
+
 
 CREATE TABLE Room(
 
@@ -75,18 +78,15 @@ cusID INT NOT NULL
 
 )
 
+
 CREATE TABLE Reservation(
 
 reserveID INT PRIMARY KEY AUTO_INCREMENT,
 bookingStatus VARCHAR(10) NOT NULL,
 paymentStatus VARCHAR(10) NOT NULL,
-noOfStayDay INT NOT NULL,
+roomNo VARCHAR(10),
 cusID INT NOT NULL,
-adminID INT NOT NULL,
-corpID INT NOT NULL,
-roomNo INT NOT NULL,
-guestID INT NOT NULL
-
+approvedBy INT
 )
 
 CREATE TABLE Billing(

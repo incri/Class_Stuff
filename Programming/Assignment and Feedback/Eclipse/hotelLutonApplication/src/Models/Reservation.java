@@ -6,19 +6,20 @@ public class Reservation {
 	private String paymentStatus;
 	private int noOfStayDay;
 	
+	
 	public Reservation() {
 		this.reserveID = 0;
 		this.bookingStatus = "";
-		this.paymentStatus = "";
+		this.paymentStatus= "";
 		this.noOfStayDay= 0;
 	}
-	
-	public Reservation(int reserveID, String bookingStatus, String paymentStatus, int noOfStayDay ) {
+	public Reservation(int reserveID, String bookingStatus, String paymentStatus, int noOfStayDay) {
 		this.reserveID = reserveID;
 		this.bookingStatus = bookingStatus;
-		this.paymentStatus = paymentStatus;
-		this.noOfStayDay = noOfStayDay;
+		this.paymentStatus= paymentStatus;
+		this.noOfStayDay= noOfStayDay;
 	}
+	
 
 	public int getReserveID() {
 		return reserveID;
