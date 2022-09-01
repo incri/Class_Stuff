@@ -2,14 +2,15 @@ package ServiceLayer;
 
 import java.util.ArrayList;
 
+import DatabaseLayer.BookingDetailsDatabaseLayer;
 import DatabaseLayer.UserDetailsDatabaseLayer;
 import Models.DefultModel;
 
 
-public class UserDetailsServiceLayer {
+public class BookingDetailsServiceLayer {
 	DefultModel defultModel;
 	
-	public UserDetailsServiceLayer() {
+	public BookingDetailsServiceLayer() {
 		this.defultModel = new DefultModel();
 	}
 
@@ -19,8 +20,8 @@ public class UserDetailsServiceLayer {
 	
 	public ArrayList<DefultModel> getAllData() throws Exception {
 		try {
-			UserDetailsDatabaseLayer userDetailsDL = new UserDetailsDatabaseLayer(this.defultModel);
-			return userDetailsDL.loadUserDetails();
+			BookingDetailsDatabaseLayer bookingDetailsDL = new BookingDetailsDatabaseLayer(this.defultModel);
+			return bookingDetailsDL.loadUserDetails();
 		}catch(Exception e) {
 			throw e;
 		}

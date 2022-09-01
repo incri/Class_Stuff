@@ -65,13 +65,11 @@ public class AdminPage extends JFrame {
 		JButton apBtnUsersDetails = new JButton("Users");
 		apBtnUsersDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				lowerDesktopPane.removeAll();
 				UserDetailsTable userTable = new UserDetailsTable();
-				
-				userTable.loadAllUser();
-				lowerDesktopPane.add(userTable);
 				userTable.setVisible(true);
-				
+				lowerDesktopPane.add(userTable);
+				userTable.loadAllUser();
 				
 			}
 		});
@@ -103,6 +101,16 @@ public class AdminPage extends JFrame {
 		upperButtonPanel.add(btnRoomDetails);
 		
 		JButton btnBooking = new JButton("Booking ");
+		btnBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lowerDesktopPane.removeAll();
+				BookingDetailsTable bookingTable = new BookingDetailsTable();
+				bookingTable.setVisible(true);
+				lowerDesktopPane.add(bookingTable);
+				bookingTable.loadAllUser();
+				
+			}
+		});
 		btnBooking.setBounds(305, 12, 116, 27);
 		upperButtonPanel.add(btnBooking);
 		
@@ -128,6 +136,14 @@ public class AdminPage extends JFrame {
 		contentPane.add(addRoomButton);
 		
 		JButton roomAsignButton = new JButton("Assign Room");
+		roomAsignButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sideDesktopPane.removeAll();
+				RoomAssignBox assignBox = new RoomAssignBox();
+				sideDesktopPane.add(assignBox);
+				assignBox.setVisible(true);
+			}
+		});
 		roomAsignButton.setBounds(989, 224, 128, 27);
 		contentPane.add(roomAsignButton);
 		

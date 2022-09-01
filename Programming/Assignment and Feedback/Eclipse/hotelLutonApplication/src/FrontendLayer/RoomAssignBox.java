@@ -1,15 +1,33 @@
 package FrontendLayer;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
+import Helper.DatabaseConnector;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
 
 public class RoomAssignBox extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField customerTextBox;
+	private JTextField roomNoTextField;
+	private DatabaseConnector db;
+	private Connection connection;
+	
+
 
 	
 	/**
@@ -19,30 +37,49 @@ public class RoomAssignBox extends JInternalFrame {
 		setBounds(0, 0, 405,372);
 		getContentPane().setLayout(null);
 		
-		JLabel addRoomtitle = new JLabel("Assign Room");
+		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+		for(MouseListener listener: basicInternalFrameUI.getNorthPane().getMouseListeners()){
+			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+			
+		}
+		
+		JLabel addRoomtitle = new JLabel("Booking Manager");
 		addRoomtitle.setFont(new Font("Dialog", Font.BOLD, 24));
-		addRoomtitle.setBounds(130, 12, 187, 33);
+		addRoomtitle.setBounds(84, 12, 232, 33);
 		getContentPane().add(addRoomtitle);
 		
 		JLabel pricePerNightLabel = new JLabel("Customer ID");
 		pricePerNightLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-		pricePerNightLabel.setBounds(12, 104, 159, 17);
+		pricePerNightLabel.setBounds(12, 83, 159, 17);
 		getContentPane().add(pricePerNightLabel);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(12, 133, 159, 31);
-		getContentPane().add(textField);
+		customerTextBox = new JTextField();
+		customerTextBox.setColumns(10);
+		customerTextBox.setBounds(12, 112, 159, 31);
+		getContentPane().add(customerTextBox);
 		
 		JLabel pricePerNightLabel_1 = new JLabel("Customer ID");
 		pricePerNightLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
-		pricePerNightLabel_1.setBounds(12, 184, 159, 17);
+		pricePerNightLabel_1.setBounds(12, 155, 159, 17);
 		getContentPane().add(pricePerNightLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(12, 213, 159, 31);
-		getContentPane().add(textField_1);
+		roomNoTextField = new JTextField();
+		roomNoTextField.setColumns(10);
+		roomNoTextField.setBounds(12, 184, 159, 31);
+		getContentPane().add(roomNoTextField);
+		
+		JButton assignButton = new JButton("Assign Room");
+		assignButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		assignButton.setBounds(12, 259, 147, 27);
+		getContentPane().add(assignButton);
+		
+		JButton btnNewButton_1 = new JButton("Cancel Booking");
+		btnNewButton_1.setBounds(171, 259, 133, 27);
+		getContentPane().add(btnNewButton_1);
 
 	}
+	
 }

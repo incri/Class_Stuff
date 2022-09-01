@@ -13,18 +13,18 @@ import Helper.DatabaseConnector;
 import Models.DefultModel;
 
 
-public class UserDetailsDatabaseLayer {
+public class BookingDetailsDatabaseLayer {
 
 	private DefultModel defultModel;
 	private DatabaseConnector db;
 	private Connection connection;
 	
 	
-	public UserDetailsDatabaseLayer() {
+	public BookingDetailsDatabaseLayer() {
 		this.defultModel = new DefultModel();
 	}
 	
-	public UserDetailsDatabaseLayer(DefultModel defultModel) throws Exception {
+	public BookingDetailsDatabaseLayer(DefultModel defultModel) throws Exception {
 		this.defultModel = defultModel;
 		try{
 		this.db = DatabaseConnector.getInstance();
@@ -46,17 +46,17 @@ public class UserDetailsDatabaseLayer {
 	public ArrayList<DefultModel> loadUserDetails() throws Exception {
 		try {
 			ArrayList<DefultModel> defultModel = new ArrayList<DefultModel>();
-			String query = "SELECT u.userID, CONCAT(c.firstName,\" \" ,c.lastName) AS Name, u.email, c2.companyName, c2.companyContact FROM Users u LEFT JOIN Customer c ON u.userID = c.userID \n"
-					+ "LEFT JOIN Corporate c2 ON c2.userID = u.userID ";
+			String query = "SELECT c.cusID , c2.corpID , CONCAT(c.firstName,\" \" ,c.lastName) AS Name, g.roomPreference , r.roomNo , cc.cardNo  FROM Customer c LEFT JOIN Corporate c2 ON c.cusID =c2.cusID  LEFT JOIN Guest g ON c.cusID  = g.cusID  LEFT JOIN Reservation r ON c.cusID = r.cusID  LEFT JOIN CreditCard cc ON c.cusID = cc.cusID ;\n";
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
 				DefultModel dM = new DefultModel();
-				dM.setUserID(rs.getString("UserID"));
+				dM.setCusID(rs.getString("cusID"));
+				dM.setCorpID(rs.getString("corpID"));
 				dM.setName(rs.getString("name"));
-				dM.setEmail(rs.getString("email"));
-				dM.setCorpName(rs.getString("companyName"));
-				dM.setCorpContact(rs.getString("companyContact"));
+				dM.setRoomPreference(rs.getString("roomPreference"));
+				dM.setRoomNo(rs.getString("roomNo"));
+				dM.setCardNumber(rs.getString("cardNo"));
 				defultModel.add(dM);
 			}
 			return defultModel;

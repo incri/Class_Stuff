@@ -13,20 +13,21 @@ import javax.swing.table.DefaultTableModel;
 import Models.DefultModel;
 import Models.Room;
 import Models.Users;
+import ServiceLayer.BookingDetailsServiceLayer;
 import ServiceLayer.UserDetailsServiceLayer;
 import javax.swing.JScrollPane;
 
 
 
-public class UserDetailsTable extends JInternalFrame {
+public class BookingDetailsTable extends JInternalFrame {
 	private DefaultTableModel model;
-	private JTable userTable;
+	private JTable bookingTable;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public UserDetailsTable() {
+	public BookingDetailsTable() {
 		setClosable(true);
 		setBounds(0, 0, 704, 436);
 		getContentPane().setLayout(null);
@@ -35,16 +36,19 @@ public class UserDetailsTable extends JInternalFrame {
 		scrollPane.setBounds(12, 68, 670, 322);
 		getContentPane().add(scrollPane);
 		
-		userTable = new JTable();
-		scrollPane.setViewportView(userTable);
+		bookingTable = new JTable();
+		scrollPane.setViewportView(bookingTable);
 		
 		model = new DefaultTableModel();
-		Object[] columnsName = new Object[5];
-		columnsName[0] = "User ID";
-		columnsName[1] = "Name";
-		columnsName[2] = "Email";
-		columnsName[3] = "Company Name";
-		columnsName[4] = "Company Contact";
+		Object[] columnsName = new Object[8];
+		columnsName[0] = "Cus ID";
+		columnsName[1] = "Company ID";
+		columnsName[2] = "Name";
+		columnsName[3] = "Room Preference";
+		columnsName[4] = "Check In Date";
+		columnsName[5] = "Check Out Date";
+		columnsName[6] = "Card Number";
+		columnsName[7] = "Booking Status";
 		
 		
 		model.setColumnCount(0);
@@ -55,8 +59,8 @@ public class UserDetailsTable extends JInternalFrame {
 	
 	public void loadAllUser() {
 		try {
-			UserDetailsServiceLayer userDetailsSL = new UserDetailsServiceLayer();
-			ArrayList<DefultModel> defultModel = userDetailsSL.getAllData();
+			BookingDetailsServiceLayer bookingDetailsSL = new BookingDetailsServiceLayer();
+			ArrayList<DefultModel> defultModel = bookingDetailsSL.getAllData();
 			setTableData(defultModel);
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -65,19 +69,22 @@ public class UserDetailsTable extends JInternalFrame {
 	
 	private void setTableData(ArrayList<DefultModel> defultModel) {
 		// Create the object array from arraylist and add to the table row
-		Object[] rowData = new Object[5];
+		Object[] rowData = new Object[8];
 		// set the number of rows in table model to zero
 		model.setRowCount(0);
 		for(int i=0; i<defultModel.size(); i++) {
 			
-			rowData[0] = defultModel.get(i).getUserID();
-			rowData[1] = defultModel.get(i).getName();
-			rowData[2] = defultModel.get(i).getEmail();
-			rowData[3] = defultModel.get(i).getCorpName();
-			rowData[4] = defultModel.get(i).getCorpContact();
+			rowData[0] = defultModel.get(i).getCusID();
+			rowData[1] = defultModel.get(i).getCorpID();
+			rowData[2] = defultModel.get(i).getName();
+			rowData[3] = defultModel.get(i).getRoomPreference();
+			rowData[4] = defultModel.get(i).getCheckInDate();
+			rowData[5] = defultModel.get(i).getCheckOutDate();
+			rowData[6] = defultModel.get(i).getCardNumber();
+			rowData[7] = defultModel.get(i).getBookingStatus();
 			model.addRow(rowData);
 		}
-		userTable.setModel(model);
+		bookingTable.setModel(model);
 
 	}
 	
