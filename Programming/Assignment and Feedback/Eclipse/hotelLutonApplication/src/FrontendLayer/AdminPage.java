@@ -107,7 +107,7 @@ public class AdminPage extends JFrame {
 				BookingDetailsTable bookingTable = new BookingDetailsTable();
 				bookingTable.setVisible(true);
 				lowerDesktopPane.add(bookingTable);
-				bookingTable.loadAllUser();
+				bookingTable.loadAllbooking();
 				
 			}
 		});

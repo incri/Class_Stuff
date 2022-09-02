@@ -4,7 +4,7 @@ public class DefultModel {
 	private String userID;
 	private String cusID;
 	private String roomNo;
-	private static int bookingID;
+	private String bookingID;
 	private String corpID;
 	private static int guestID;
 	private static int reserveID;
@@ -35,7 +35,7 @@ public class DefultModel {
 		this.userID = "";
 		this.cusID = "";
 		this.roomNo = "";
-		DefultModel.bookingID = 0;
+		this.bookingID = "";
 		this.corpID = "";
 		DefultModel.guestID = 0;
 		DefultModel.reserveID = 0;
@@ -62,7 +62,7 @@ public class DefultModel {
 
 	
 	public DefultModel(String userID, String cusID,String roomNo,
-			int bookingID, int guestID, int reserveID, int billID, String corpID,
+			String bookingID, int guestID, int reserveID, int billID, String corpID,
 			String email, String name, String corpName, String corpContact, String guestName, String contact,
 			String roomPreference, String country, String checkInDate, String checkOutDate, String cardType,
 			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard ) {
@@ -70,7 +70,7 @@ public class DefultModel {
 		this.userID = userID;
 		this.cusID = cusID;
 		this.roomNo = roomNo;
-		DefultModel.bookingID = bookingID;
+		this.bookingID = bookingID;
 		this.corpID = corpID;
 		DefultModel.guestID = guestID;
 		DefultModel.reserveID = reserveID;
@@ -132,14 +132,14 @@ public class DefultModel {
 
 
 
-	public static int getBookingID() {
+	public String getBookingID() {
 		return bookingID;
 	}
 
 
 
-	public static void setBookingID(int bookingID) {
-		DefultModel.bookingID = bookingID;
+	public void setBookingID(String string) {
+		this.bookingID = string;
 	}
 
 

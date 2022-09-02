@@ -227,8 +227,10 @@ public class BookingFormPage extends JFrame {
 		// Perform the required action from the business layer.
 		try {
 			
+			String bookingStatus = "Pending";
+			String paymentStatus = "Pending";
+			
 			GuestData guest = new GuestData();
-			Reservation reserve = new Reservation();
 			
 			guest.setFullName(fullNameTextField.getText());
 			guest.setdOB(dOBTextField.getText());
@@ -240,44 +242,40 @@ public class BookingFormPage extends JFrame {
 			guest.setCheckInDate(checkInDateTextField.getText());
 			guest.setCheckOutDate(checkOutDateTextField.getText());
 			
-			
-			
+			Reservation reserve = new Reservation();
+			reserve.setBookingStatus(bookingStatus);
+			reserve.setPaymentStatus(paymentStatus);
 			
 			GuestServiceLayer guestSL = new GuestServiceLayer();
 			ReserveServiceLayer reserveSL = new ReserveServiceLayer();
+			CreditServiceLayer creditSL = new CreditServiceLayer();
 			
-			String bookingStatus = "Pending";
-			String paymentStatus = "Pending";
-			
-			
+		
 			
 			if(creditCardChckbx.isSelected()) {
+				
 				CreditCard credit = new CreditCard();
-				CreditServiceLayer creditSL = new CreditServiceLayer();
 				
 				credit.setCardType(CardDetailBox.cardTypeTextField.getText());
 				credit.setNameOnCard(CardDetailBox.nameOnCardTextField.getText());
 				credit.setCardNo(CardDetailBox.cardNumberTextField.getText());
-				 
+				
+				
 				if(guestSL.validateGuestDetails(guest) && creditSL.validateCreditDetails(credit)) {
+					
 					guest = guestSL.guestSave(guest);
-					credit = creditSL.creditSave(credit);
-					reserve.setBookingStatus(bookingStatus);
-					reserve.setPaymentStatus(paymentStatus);
 					reserve = reserveSL.reservationSave(reserve);
-				}
+					credit = creditSL.creditSave(credit);
+				}	
 			}
 			else {
-					guestSL.validateGuestDetails(guest);
+				if(guestSL.validateGuestDetails(guest)){
+					
 					guest = guestSL.guestSave(guest);
-					reserve.setBookingStatus(bookingStatus);
-					reserve.setPaymentStatus(paymentStatus);
 					reserve = reserveSL.reservationSave(reserve);
 					
-			}
-			
-			
-			
+				}	
+			}	
 		}
 		catch(InputException ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());

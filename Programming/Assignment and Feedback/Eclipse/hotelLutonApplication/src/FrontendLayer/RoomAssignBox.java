@@ -15,6 +15,12 @@ import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import Helper.DatabaseConnector;
+import Helper.InputException;
+import Models.DefultModel;
+import Models.Users;
+import ServiceLayer.RoomAssignServiceLayer;
+import ServiceLayer.RoomServiceLayer;
+import ServiceLayer.UserServiceLayer;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -26,7 +32,7 @@ public class RoomAssignBox extends JInternalFrame {
 	private JTextField roomNoTextField;
 	private DatabaseConnector db;
 	private Connection connection;
-	
+	private DefultModel defultModel;
 
 
 	
@@ -48,7 +54,7 @@ public class RoomAssignBox extends JInternalFrame {
 		addRoomtitle.setBounds(84, 12, 232, 33);
 		getContentPane().add(addRoomtitle);
 		
-		JLabel pricePerNightLabel = new JLabel("Customer ID");
+		JLabel pricePerNightLabel = new JLabel("Booking ID");
 		pricePerNightLabel.setFont(new Font("Dialog", Font.BOLD, 18));
 		pricePerNightLabel.setBounds(12, 83, 159, 17);
 		getContentPane().add(pricePerNightLabel);
@@ -58,7 +64,7 @@ public class RoomAssignBox extends JInternalFrame {
 		customerTextBox.setBounds(12, 112, 159, 31);
 		getContentPane().add(customerTextBox);
 		
-		JLabel pricePerNightLabel_1 = new JLabel("Customer ID");
+		JLabel pricePerNightLabel_1 = new JLabel("Room No");
 		pricePerNightLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
 		pricePerNightLabel_1.setBounds(12, 155, 159, 17);
 		getContentPane().add(pricePerNightLabel_1);
@@ -71,6 +77,7 @@ public class RoomAssignBox extends JInternalFrame {
 		JButton assignButton = new JButton("Assign Room");
 		assignButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				assignRoom();
 			}
 		});
 		assignButton.setBounds(12, 259, 147, 27);
@@ -80,6 +87,29 @@ public class RoomAssignBox extends JInternalFrame {
 		btnNewButton_1.setBounds(171, 259, 133, 27);
 		getContentPane().add(btnNewButton_1);
 
+	}
+	
+	private void assignRoom() {
+	
+		try {
+			 defultModel = new DefultModel();
+			 defultModel.setBookingID(customerTextBox.getText());
+			 defultModel.setRoomNo(roomNoTextField.getText());
+			
+			
+			RoomAssignServiceLayer roomAssignSL = new RoomAssignServiceLayer();
+			
+			roomAssignSL.roomAssign(defultModel);
+			
+			
+		}
+		catch(InputException ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+		catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+			
 	}
 	
 }

@@ -36,6 +36,7 @@ public class UserDetailsTable extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		userTable = new JTable();
+		userTable.setFillsViewportHeight(true);
 		scrollPane.setViewportView(userTable);
 		
 		model = new DefaultTableModel();

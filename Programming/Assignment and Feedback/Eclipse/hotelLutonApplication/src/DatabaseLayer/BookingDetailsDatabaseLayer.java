@@ -46,17 +46,28 @@ public class BookingDetailsDatabaseLayer {
 	public ArrayList<DefultModel> loadUserDetails() throws Exception {
 		try {
 			ArrayList<DefultModel> defultModel = new ArrayList<DefultModel>();
-			String query = "SELECT c.cusID , c2.corpID , CONCAT(c.firstName,\" \" ,c.lastName) AS Name, g.roomPreference , r.roomNo , cc.cardNo  FROM Customer c LEFT JOIN Corporate c2 ON c.cusID =c2.cusID  LEFT JOIN Guest g ON c.cusID  = g.cusID  LEFT JOIN Reservation r ON c.cusID = r.cusID  LEFT JOIN CreditCard cc ON c.cusID = cc.cusID ;\n";
+			String query = "SELECT r.reserveID  , CONCAT(c.firstName,\" \" ,c.lastName) AS Name, "
+					+ "c2.companyName,c2.companyContact, g.roomPreference,g.country ,"
+					+ "g.checkInDate, g.checkOutDate,r.bookingStatus, r.roomNo  "
+					+ "FROM Customer c LEFT JOIN Corporate c2 ON c.cusID =c2.cusID  "
+					+ "LEFT JOIN Guest g ON c.cusID  = g.cusID  "
+					+ "LEFT JOIN Reservation r ON c.cusID = r.cusID "
+					+ "GROUP BY r.reserveID  ORDER BY c.cusID\n";
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
 				DefultModel dM = new DefultModel();
-				dM.setCusID(rs.getString("cusID"));
-				dM.setCorpID(rs.getString("corpID"));
+				dM.setBookingID(rs.getString("reserveID"));
 				dM.setName(rs.getString("name"));
+				dM.setCorpName(rs.getString("companyName"));
+				dM.setCorpContact(rs.getString("companyContact"));
 				dM.setRoomPreference(rs.getString("roomPreference"));
+				dM.setCountry(rs.getString("country"));
+				dM.setCheckInDate(rs.getString("checkInDate"));
+				dM.setCheckOutDate(rs.getString("checkOutDate"));
+				dM.setBookingStatus(rs.getString("bookingStatus"));
 				dM.setRoomNo(rs.getString("roomNo"));
-				dM.setCardNumber(rs.getString("cardNo"));
+				
 				defultModel.add(dM);
 			}
 			return defultModel;
