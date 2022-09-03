@@ -115,6 +115,15 @@ public class AdminPage extends JFrame {
 		upperButtonPanel.add(btnBooking);
 		
 		JButton btnPayment = new JButton("Payment");
+		btnPayment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PaymentDetailsBox paymentTable = new PaymentDetailsBox();
+				
+				lowerDesktopPane.add(paymentTable);
+				paymentTable.setVisible(true);
+				paymentTable.loadAllPayment();
+			}
+		});
 		btnPayment.setBounds(450, 12, 105, 27);
 		upperButtonPanel.add(btnPayment);
 		

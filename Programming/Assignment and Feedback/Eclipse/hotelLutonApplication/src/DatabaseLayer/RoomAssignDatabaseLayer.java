@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 import Helper.DatabaseConnector;
 import Models.DefultModel;
 
@@ -47,7 +49,9 @@ public class RoomAssignDatabaseLayer {
 		
 		
 			PreparedStatement updateRoomStatement;
+			PreparedStatement updateStatusStatement;
 			ResultSet irs;
+			ResultSet urs;
 			
 			
 		try {
@@ -55,10 +59,17 @@ public class RoomAssignDatabaseLayer {
 			updateRoomStatement = this.connection.prepareStatement(inserRoomNoQuery);
 			updateRoomStatement.setString(1, this.defultModel.getRoomNo());
 			updateRoomStatement.setString(2, this.defultModel.getBookingID());
-				
+			
+			String updateStatusQuery = "UPDATE Reservation r INNER JOIN Room ro ON r.roomNo = ro.roomNo SET"
+					+ " r.bookingStatus = 'Approved', ro.roomStatus = 'Booked'  WHERE reserveID = ?";
+			updateStatusStatement = this.connection.prepareStatement(updateStatusQuery);
+			updateStatusStatement.setString(1, this.defultModel.getBookingID());
 				try {
 					
 					updateRoomStatement.executeUpdate();
+					updateStatusStatement.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Room Assigned", "Complete", 2);
+					
 					
 				} catch (Exception ex) {
 					throw ex;

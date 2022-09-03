@@ -11,20 +11,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 import Models.DefultModel;
-import Models.Room;
 import ServiceLayer.BookingDetailsServiceLayer;
+import ServiceLayer.PaymentDetailsServiceLayer;
 import ServiceLayer.RoomServiceLayer;
 
 
 import javax.swing.JScrollPane;
 
-public class BookingDetailsTable extends JInternalFrame {
-	private JTable bookingtable;
+public class PaymentDetailsBox extends JInternalFrame {
+	private JTable paymentTable;
 	private DefaultTableModel model;
 	/**
 	 * Create the frame.
 	 */
-	public BookingDetailsTable() {
+	public PaymentDetailsBox() {
 		setClosable(true);
 		setBounds(0, 0, 704, 436);
 		getContentPane().setLayout(null);
@@ -38,22 +38,18 @@ public class BookingDetailsTable extends JInternalFrame {
 		scrollPane.setBounds(12, 67, 670, 323);
 		getContentPane().add(scrollPane);
 		
-		bookingtable = new JTable();
-		scrollPane.setViewportView(bookingtable);
+		paymentTable = new JTable();
+		scrollPane.setViewportView(paymentTable);
 		
 		model = new DefaultTableModel();
-		Object[] columnsName = new Object[11];
+		Object[] columnsName = new Object[7];
 		columnsName[0] = "Booking ID";
-		columnsName[1] = "Name";
-		columnsName[2] = "Corporate Name";
-		columnsName[3] = "Corporate Contact";
-		columnsName[4] = "Credit Number";
-		columnsName[5] = "Prefered Room";
-		columnsName[6] = "Country";
-		columnsName[7] = "Check In date";
-		columnsName[8] = "Check Out date";
-		columnsName[9] = "Booking Status";
-		columnsName[10] = "Room No";
+		columnsName[1] = "Guest Name";
+		columnsName[2] = "Guest Contact";
+		columnsName[3] = "Room No";
+		columnsName[4] = "Room Price";
+		columnsName[5] = "Total Bill";
+		columnsName[6] = "Payment Status";
 		
 		
 		
@@ -64,10 +60,10 @@ public class BookingDetailsTable extends JInternalFrame {
 
 	}
 	
-	public void loadAllbooking() {
+	public void loadAllPayment() {
 		try {
-			BookingDetailsServiceLayer bookingSL = new BookingDetailsServiceLayer();
-			ArrayList<DefultModel> defultModel = bookingSL.getAllBooking();
+			PaymentDetailsServiceLayer paymentSL = new PaymentDetailsServiceLayer();
+			ArrayList<DefultModel> defultModel = paymentSL.getAllPayment();
 			setTableBookingData(defultModel);
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -76,27 +72,22 @@ public class BookingDetailsTable extends JInternalFrame {
 	
 	private void setTableBookingData(ArrayList<DefultModel> defultModel) {
 		// Create the object array from arraylist and add to the table row
-		Object[] rowData = new Object[11];
+		Object[] rowData = new Object[8];
 		// set the number of rows in table model to zero
 		model.setRowCount(0);
 		for(int i=0; i<defultModel.size(); i++) {
 			rowData[0] = defultModel.get(i).getBookingID();
-			rowData[1] = defultModel.get(i).getName();
-			rowData[2] = defultModel.get(i).getCorpName();
-			rowData[3] = defultModel.get(i).getCorpContact();
-			rowData[4] = defultModel.get(i).getCardNumber();
-			rowData[5] = defultModel.get(i).getRoomPreference();
-			rowData[6] = defultModel.get(i).getCountry();
-			rowData[7] = defultModel.get(i).getCheckInDate();
-			rowData[8] = defultModel.get(i).getCheckOutDate();
-			rowData[9] = defultModel.get(i).getBookingStatus();
-			rowData[10] = defultModel.get(i).getRoomNo();
-			
+			rowData[1] = defultModel.get(i).getGuestName();
+			rowData[2] = defultModel.get(i).getContact();
+			rowData[3] = defultModel.get(i).getRoomNo();
+			rowData[4] = defultModel.get(i).getPricePerNight();
+			rowData[5] = defultModel.get(i).getTotalBill();
+			rowData[6] = defultModel.get(i).getPaymentStatus();
 			
 		
 			model.addRow(rowData);
 		}
-		bookingtable.setModel(model);
+		paymentTable.setModel(model);
 
 	}
 }

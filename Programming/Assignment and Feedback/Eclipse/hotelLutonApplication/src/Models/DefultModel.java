@@ -27,6 +27,8 @@ public class DefultModel {
 	private String bookingStatus;
 	private String paymentStatus;
 	private String totalBill;
+	private String pricePerNight;
+
 	
 	
 	
@@ -57,6 +59,7 @@ public class DefultModel {
 		this.bookingStatus =  "";
 		this.paymentStatus =  "";
 		this.totalBill =  "";
+		this.pricePerNight =  "";
 	}
 
 
@@ -65,7 +68,7 @@ public class DefultModel {
 			String bookingID, int guestID, int reserveID, int billID, String corpID,
 			String email, String name, String corpName, String corpContact, String guestName, String contact,
 			String roomPreference, String country, String checkInDate, String checkOutDate, String cardType,
-			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard ) {
+			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard,String pricePerNight ) {
 		
 		this.userID = userID;
 		this.cusID = cusID;
@@ -92,6 +95,7 @@ public class DefultModel {
 		this.bookingStatus =  bookingStatus;
 		this.paymentStatus =  paymentStatus;
 		this.totalBill =  totalBill;
+		this.pricePerNight =  pricePerNight;
 	}
 
 
@@ -380,6 +384,18 @@ public class DefultModel {
 
 	public void setTotalBill(String totalBill) {
 		this.totalBill = totalBill;
+	}
+
+
+
+	public String getPricePerNight() {
+		return pricePerNight;
+	}
+
+
+
+	public void setPricePerNight(String pricePerNight) {
+		this.pricePerNight = pricePerNight;
 	}
 
 	 
