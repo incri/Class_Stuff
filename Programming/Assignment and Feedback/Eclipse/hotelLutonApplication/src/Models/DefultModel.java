@@ -6,9 +6,9 @@ public class DefultModel {
 	private String roomNo;
 	private String bookingID;
 	private String corpID;
-	private static int guestID;
-	private static int reserveID;
-	private static int billID;
+	private String  guestID;
+	private String  reserveID;
+	private String  billID;
 	
 	
 	private String email;
@@ -28,7 +28,7 @@ public class DefultModel {
 	private String paymentStatus;
 	private String totalBill;
 	private String pricePerNight;
-
+	private String discountPer;
 	
 	
 	
@@ -39,9 +39,9 @@ public class DefultModel {
 		this.roomNo = "";
 		this.bookingID = "";
 		this.corpID = "";
-		DefultModel.guestID = 0;
-		DefultModel.reserveID = 0;
-		DefultModel.billID = 0;
+		this.guestID = "";
+		this.reserveID = "";
+		this.billID = "";
 		
 		this.email =  "";
 		this.name =  "";
@@ -60,24 +60,25 @@ public class DefultModel {
 		this.paymentStatus =  "";
 		this.totalBill =  "";
 		this.pricePerNight =  "";
+		this.discountPer = "";
 	}
 
 
 	
 	public DefultModel(String userID, String cusID,String roomNo,
-			String bookingID, int guestID, int reserveID, int billID, String corpID,
+			String bookingID, String guestID, String reserveID, String billID, String corpID,
 			String email, String name, String corpName, String corpContact, String guestName, String contact,
 			String roomPreference, String country, String checkInDate, String checkOutDate, String cardType,
-			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard,String pricePerNight ) {
+			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard,String pricePerNight, String discountPer ) {
 		
 		this.userID = userID;
 		this.cusID = cusID;
 		this.roomNo = roomNo;
 		this.bookingID = bookingID;
 		this.corpID = corpID;
-		DefultModel.guestID = guestID;
-		DefultModel.reserveID = reserveID;
-		DefultModel.billID = billID;
+		this.guestID = guestID;
+		this.reserveID = reserveID;
+		this.billID = billID;
 		
 		this.email = email;
 		this.name = name;
@@ -96,6 +97,7 @@ public class DefultModel {
 		this.paymentStatus =  paymentStatus;
 		this.totalBill =  totalBill;
 		this.pricePerNight =  pricePerNight;
+		this.discountPer = discountPer;
 	}
 
 
@@ -160,38 +162,38 @@ public class DefultModel {
 
 
 
-	public static int getGuestID() {
+	public  String getGuestID() {
 		return guestID;
 	}
 
 
 
-	public static void setGuestID(int guestID) {
-		DefultModel.guestID = guestID;
+	public  void setGuestID(String guestID) {
+		this.guestID = guestID;
 	}
 
 
 
-	public static int getReserveID() {
+	public  String getReserveID() {
 		return reserveID;
 	}
 
 
 
-	public static void setReserveID(int reserveID) {
-		DefultModel.reserveID = reserveID;
+	public  void setReserveID(String reserveID) {
+		this.reserveID = reserveID;
 	}
 
 
 
-	public static int getBillID() {
+	public  String getBillID() {
 		return billID;
 	}
 
 
 
-	public static void setBillID(int billID) {
-		DefultModel.billID = billID;
+	public  void setBillID(String billID) {
+		this.billID = billID;
 	}
 
 
@@ -396,6 +398,18 @@ public class DefultModel {
 
 	public void setPricePerNight(String pricePerNight) {
 		this.pricePerNight = pricePerNight;
+	}
+
+
+
+	public String getDiscountPer() {
+		return discountPer;
+	}
+
+
+
+	public void setDiscountPer(String discountPer) {
+		this.discountPer = discountPer;
 	}
 
 	 

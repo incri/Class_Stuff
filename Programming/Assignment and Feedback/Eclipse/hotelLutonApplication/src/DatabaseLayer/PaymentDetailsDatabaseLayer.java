@@ -63,6 +63,7 @@ public class PaymentDetailsDatabaseLayer {
 				dM.setPaymentStatus(rs.getString("paymentStatus"));
 				
 				defultModel.add(dM);
+				
 			}
 			return defultModel;
 		}

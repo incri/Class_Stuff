@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 
+import DatabaseLayer.BookingDetailsDatabaseLayer;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -141,7 +143,7 @@ public class AdminPage extends JFrame {
 				sideDesktopPane.add(addRoom);
 			}
 		});
-		addRoomButton.setBounds(839, 224, 116, 27);
+		addRoomButton.setBounds(854, 224, 116, 27);
 		contentPane.add(addRoomButton);
 		
 		JButton roomAsignButton = new JButton("Assign Room");
@@ -153,8 +155,20 @@ public class AdminPage extends JFrame {
 				assignBox.setVisible(true);
 			}
 		});
-		roomAsignButton.setBounds(989, 224, 128, 27);
+		roomAsignButton.setBounds(982, 224, 128, 27);
 		contentPane.add(roomAsignButton);
+		
+		JButton createBillLable = new JButton("Create Bill");
+		createBillLable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sideDesktopPane.removeAll();
+				CreateBillBox createBill = new CreateBillBox();
+				sideDesktopPane.add(createBill);
+				createBill.setVisible(true);
+			}
+		});
+		createBillLable.setBounds(1122, 224, 105, 27);
+		contentPane.add(createBillLable);
 		
 		
 		

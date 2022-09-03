@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 public class BookingDetailsTable extends JInternalFrame {
 	private JTable bookingtable;
 	private DefaultTableModel model;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -91,8 +92,6 @@ public class BookingDetailsTable extends JInternalFrame {
 			rowData[8] = defultModel.get(i).getCheckOutDate();
 			rowData[9] = defultModel.get(i).getBookingStatus();
 			rowData[10] = defultModel.get(i).getRoomNo();
-			
-			
 		
 			model.addRow(rowData);
 		}
