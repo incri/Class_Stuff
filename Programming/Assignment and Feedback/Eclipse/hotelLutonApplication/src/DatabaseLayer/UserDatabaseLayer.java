@@ -27,6 +27,7 @@ public class UserDatabaseLayer {
 	public static int cusPrimeKey;
 	public static int adminPrimeKey;
 	public static int PrimKey;
+	public static String uName;
 	
 	
 	public UserDatabaseLayer() {
@@ -66,7 +67,7 @@ public class UserDatabaseLayer {
 		
 		// query to check if the username and password exist in data base or not
 		
-		String customerQuery = "SELECT u.userID, c.cusID FROM Users u INNER JOIN Customer c  ON u.userID  = c.userID WHERE u.userName = ? AND u.password = ? AND u.userType is NULL ";
+		String customerQuery = "SELECT u.userID, c.cusID, u.userName FROM Users u INNER JOIN Customer c  ON u.userID  = c.userID WHERE u.userName = ? AND u.password = ? AND u.userType is NULL ";
 		String adminQuery = "SELECT u.userID, a.adminID FROM Users u INNER JOIN Administration a  ON u.userID = a.userID WHERE u.userName = ? AND u.password = ? AND u.userType = 'receptionist'";
 		
 		try {
@@ -92,6 +93,7 @@ public class UserDatabaseLayer {
 				
 				userPrimeKey = crs.getInt(2);
 				cusPrimeKey = crs.getInt(2);
+				uName = crs.getString("userName");
 				UserHomePage homePage = new UserHomePage();
 				homePage.setVisible(true);
 				homePage.pack();

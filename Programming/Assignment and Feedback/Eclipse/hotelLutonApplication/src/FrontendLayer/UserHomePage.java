@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DatabaseLayer.UserDatabaseLayer;
+
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 import java.awt.Font;
@@ -146,5 +149,22 @@ public class UserHomePage extends JFrame {
 		btnBookNow.setBackground(Color.RED);
 		btnBookNow.setBounds(553, 548, 144, 45);
 		contentPane.add(btnBookNow);
+		
+		JButton btnProfile = new JButton("Profile");
+		btnProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProfilePage profile = new ProfilePage();
+				profile.setVisible(true);
+			}
+		});
+		btnProfile.setBackground(Color.LIGHT_GRAY);
+		btnProfile.setBounds(1119, 98, 105, 27);
+		contentPane.add(btnProfile);
+		
+		JLabel userNameLabel = new JLabel(UserDatabaseLayer.uName);
+		userNameLabel.setFont(new Font("Dialog", Font.BOLD, 16));
+		userNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		userNameLabel.setBounds(966, 98, 135, 27);
+		contentPane.add(userNameLabel);
 	}
 }
