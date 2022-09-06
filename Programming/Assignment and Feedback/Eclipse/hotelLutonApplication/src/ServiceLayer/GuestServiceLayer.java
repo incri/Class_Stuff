@@ -80,11 +80,16 @@ public boolean validateGuestDetails(GuestData guest) throws InputException {
 		}
 		
 		
+		if(guest.getCheckInDate() == null || guest.getCheckInDate().length() == 0) {
+			throw new InputException("Must enter Check Out Date");
+		}
+		if(checkInDate.before(currentDate)) {
+			throw new InputException("Invalid Check In Date");
+		}
+		
 		if(!(guest.getCheckInDate()).matches("^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$") ) {
 			throw new InputException("Please enter valid date format i.e. (dd/mm/yyyy)");
 		}
-		
-		
 		
 		if(guest.getCheckOutDate() == null || guest.getCheckOutDate().length() == 0) {
 			throw new InputException("Must enter Check Out Date");
