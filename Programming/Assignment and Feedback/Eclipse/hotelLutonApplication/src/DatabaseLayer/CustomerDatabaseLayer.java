@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 import FrontendLayer.AdminPage;
+import FrontendLayer.SignUpBox;
 import FrontendLayer.UserHomePage;
 import Helper.DatabaseConnector;
 import Models.Customer;

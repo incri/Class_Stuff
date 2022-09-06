@@ -39,12 +39,18 @@ public boolean ValidateSignup(Users user) throws InputException {
 		if(user.getEmail() == null || user.getEmail().length() == 0) {
 			throw new InputException("Email name cannot be empty.");
 		}
-
+		if(!(user.getEmail()).matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") ) {
+			throw new InputException("Invalid email format");
+		}
+		
 		if(user.getUserName() == null || user.getUserName().length() == 0) {
 			throw new InputException("User name cannot be empty.");
 		}
 		if(user.getPassword() == null || user.getPassword().length() == 0) {
 			throw new InputException("Password cannot be empty.");
+		}
+		if(!(new String(user.getPassword()).equals(new String(user.getConfirmPassword())))) {
+			throw new InputException("Password not Matched");
 		}
 		
 		return true;

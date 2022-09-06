@@ -137,6 +137,7 @@ public class SignUpBox extends JInternalFrame {
 		btnSignup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				register();
+		
 			}
 		});
 		
@@ -190,6 +191,7 @@ public class SignUpBox extends JInternalFrame {
 			user.setEmail(siEmailTextField.getText());
 			user.setUserName(siUsersNameTextField.getText());
 			user.setPassword(String.valueOf(siPasswordPassField.getPassword()));
+			user.setConfirmPassword(String.valueOf(siConfirmPasswordPassField.getPassword()));
 			
 			Customer customer = new Customer();
 			customer.setFirstName(siFirstTextField.getText());
@@ -224,7 +226,7 @@ public class SignUpBox extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
 		}
 		catch(Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage());
+			JOptionPane.showMessageDialog(null,"Complete your information");
 		}
 	}
 	

@@ -27,10 +27,13 @@ public boolean ValidateCorporate(Corporate corporate) throws InputException {
 		if(corporate.getCompanyName() == null || corporate.getCompanyName().length() == 0) {
 			throw new InputException("Company name cannot be empty.");
 		}
+		
 		if(corporate.getCompanyContact() == null || corporate.getCompanyContact().length() == 0) {
 			throw new InputException("Company Contact cannot be empty.");
 		}
-		
+		if(!(corporate.getCompanyContact()).matches("^[0-9, ]+$") ) {
+			throw new InputException("cannot input alphabet on contact");
+		}
 		return true;
 	}
 	

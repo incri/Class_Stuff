@@ -230,30 +230,29 @@ public class BookingFormPage extends JFrame {
 			String bookingStatus = "Pending";
 			String paymentStatus = "Pending";
 			
+			GuestData guest = new GuestData();
 			
+			guest.setFullName(fullNameTextField.getText());
+			guest.setdOB(dOBTextField.getText());
+			guest.setContact(contactTextField.getText());
+			guest.setRoomPreference(roomPreferenceTextField.getText());
+			guest.setCountry(countryTextField.getText());
+			guest.setState(stateTextField.getText());
+			guest.setCity(cityTextField.getText());
+			guest.setCheckInDate(checkInDateTextField.getText());
+			guest.setCheckOutDate(checkOutDateTextField.getText());
+			
+			Reservation reserve = new Reservation();
+			reserve.setBookingStatus(bookingStatus);
+			reserve.setPaymentStatus(paymentStatus);
+			
+			GuestServiceLayer guestSL = new GuestServiceLayer();
+			ReserveServiceLayer reserveSL = new ReserveServiceLayer();
+			CreditServiceLayer creditSL = new CreditServiceLayer();
 			
 		
 			
 			if(creditCardChckbx.isSelected()) {
-				
-				GuestServiceLayer guestSL = new GuestServiceLayer();
-				ReserveServiceLayer reserveSL = new ReserveServiceLayer();
-				CreditServiceLayer creditSL = new CreditServiceLayer();
-				GuestData guest = new GuestData();
-				
-				guest.setFullName(fullNameTextField.getText());
-				guest.setdOB(dOBTextField.getText());
-				guest.setContact(contactTextField.getText());
-				guest.setRoomPreference(roomPreferenceTextField.getText());
-				guest.setCountry(countryTextField.getText());
-				guest.setState(stateTextField.getText());
-				guest.setCity(cityTextField.getText());
-				guest.setCheckInDate(checkInDateTextField.getText());
-				guest.setCheckOutDate(checkOutDateTextField.getText());
-				
-				Reservation reserve = new Reservation();
-				reserve.setBookingStatus(bookingStatus);
-				reserve.setPaymentStatus(paymentStatus);
 				
 				CreditCard credit = new CreditCard();
 				
@@ -270,25 +269,6 @@ public class BookingFormPage extends JFrame {
 				}	
 			}
 			else {
-				GuestServiceLayer guestSL = new GuestServiceLayer();
-				ReserveServiceLayer reserveSL = new ReserveServiceLayer();
-				
-				GuestData guest = new GuestData();
-				
-				guest.setFullName(fullNameTextField.getText());
-				guest.setdOB(dOBTextField.getText());
-				guest.setContact(contactTextField.getText());
-				guest.setRoomPreference(roomPreferenceTextField.getText());
-				guest.setCountry(countryTextField.getText());
-				guest.setState(stateTextField.getText());
-				guest.setCity(cityTextField.getText());
-				guest.setCheckInDate(checkInDateTextField.getText());
-				guest.setCheckOutDate(checkOutDateTextField.getText());
-				
-				Reservation reserve = new Reservation();
-				reserve.setBookingStatus(bookingStatus);
-				reserve.setPaymentStatus(paymentStatus);
-				
 				if(guestSL.validateGuestDetails(guest)){
 					
 					guest = guestSL.guestSave(guest);

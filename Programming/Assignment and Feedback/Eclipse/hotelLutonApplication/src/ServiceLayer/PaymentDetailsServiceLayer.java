@@ -3,7 +3,9 @@ package ServiceLayer;
 import java.util.ArrayList;
 
 import DatabaseLayer.PaymentDetailsDatabaseLayer;
+import DatabaseLayer.UserDatabaseLayer;
 import Models.DefultModel;
+import Models.Users;
 
 
 public class PaymentDetailsServiceLayer {
@@ -25,4 +27,14 @@ public class PaymentDetailsServiceLayer {
 			throw e;
 		}
 	}
+	public DefultModel generateBill(DefultModel model) throws Exception {
+		try {
+			PaymentDetailsDatabaseLayer paymentDatabaseLayer = new PaymentDetailsDatabaseLayer(model);
+			return paymentDatabaseLayer.generateBill();
+		}catch(Exception e) {
+			throw e;
+		}
+		
+	}
+	
 }

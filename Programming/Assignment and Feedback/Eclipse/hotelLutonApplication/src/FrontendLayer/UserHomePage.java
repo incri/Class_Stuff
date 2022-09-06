@@ -155,6 +155,7 @@ public class UserHomePage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ProfilePage profile = new ProfilePage();
 				profile.setVisible(true);
+				profile.loadAllUserbooking();
 			}
 		});
 		btnProfile.setBackground(Color.LIGHT_GRAY);

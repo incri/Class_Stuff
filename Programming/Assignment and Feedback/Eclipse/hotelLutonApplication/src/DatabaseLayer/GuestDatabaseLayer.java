@@ -70,10 +70,7 @@ public class GuestDatabaseLayer {
 				statement.setInt(10, UserDatabaseLayer.cusPrimeKey);
 				
 				try {
-					
-					if (statement.executeUpdate() !=0) {
 						if (statement.executeUpdate() !=0) {
-							
 							ResultSet generatedKeys = statement.getGeneratedKeys();
 							 if ( generatedKeys.next() ) {
 					                guestPrimeKey = generatedKeys.getInt(1);
@@ -81,19 +78,15 @@ public class GuestDatabaseLayer {
 						}
 					}
 			
-				} catch (Exception ex) {
+				catch (Exception ex) {
 					throw ex;
 				}
 				
-		
-		
-		} catch (Exception ex) {
+		}catch (Exception ex) {
 			throw ex;
 		}
-	
 		return guest;
 	}
-	
 	
 }
 

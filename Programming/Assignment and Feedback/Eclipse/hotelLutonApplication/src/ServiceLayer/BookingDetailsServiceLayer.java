@@ -26,4 +26,13 @@ public class BookingDetailsServiceLayer {
 			throw e;
 		}
 	}
+	
+	public ArrayList<DefultModel> getAllUserBooking() throws Exception {
+		try {
+			BookingDetailsDatabaseLayer bookingDetailsDL = new BookingDetailsDatabaseLayer(this.defultModel);
+			return bookingDetailsDL.getAllUserBooking();
+		}catch(Exception e) {
+			throw e;
+		}
+	}
 }

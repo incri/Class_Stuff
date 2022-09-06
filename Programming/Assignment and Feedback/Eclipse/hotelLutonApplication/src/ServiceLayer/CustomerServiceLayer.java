@@ -28,8 +28,15 @@ public class CustomerServiceLayer {
 		if(customer.getFirstName() == null || customer.getFirstName().length() == 0) {
 			throw new InputException("First name cannot be empty.");
 		}
+		if(!(customer.getFirstName()).matches("[a-zA-Z]+") ) {
+			throw new InputException("Cannot input number on first name");
+		}
 		if(customer.getLastName() == null || customer.getLastName().length() == 0) {
 			throw new InputException("Last name cannot be empty.");
+		}
+		
+		if(!(customer.getLastName()).matches("[a-zA-Z]+") ) {
+			throw new InputException("Cannot input number on last name");
 		}
 		
 		return true;

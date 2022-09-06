@@ -28,6 +28,11 @@ public class UserDatabaseLayer {
 	public static int adminPrimeKey;
 	public static int PrimKey;
 	public static String uName;
+	public static String nameConcat;
+	public static String userEmail;
+	public static String corpName;
+	public static String corpcontact;
+	
 	
 	
 	public UserDatabaseLayer() {
@@ -67,7 +72,12 @@ public class UserDatabaseLayer {
 		
 		// query to check if the username and password exist in data base or not
 		
-		String customerQuery = "SELECT u.userID, c.cusID, u.userName FROM Users u INNER JOIN Customer c  ON u.userID  = c.userID WHERE u.userName = ? AND u.password = ? AND u.userType is NULL ";
+		String customerQuery = "SELECT u.userID, c.cusID, u.userName, "
+				+ "CONCAT(c.firstName,' ',c.lastName) AS name, u.email, "
+				+ "c2.companyName , c2.companyContact FROM Users u "
+				+ "INNER JOIN Customer c  ON u.userID  = c.userID "
+				+ "LEFT JOIN Corporate c2 ON c.userID  = c2.userID "
+				+ "WHERE u.userName = ? AND u.password = ? AND u.userType is NULL";
 		String adminQuery = "SELECT u.userID, a.adminID FROM Users u INNER JOIN Administration a  ON u.userID = a.userID WHERE u.userName = ? AND u.password = ? AND u.userType = 'receptionist'";
 		
 		try {
@@ -94,6 +104,10 @@ public class UserDatabaseLayer {
 				userPrimeKey = crs.getInt(2);
 				cusPrimeKey = crs.getInt(2);
 				uName = crs.getString("userName");
+				nameConcat = crs.getString("name");
+				userEmail = crs.getString("email");
+				corpName = crs.getString("companyname");
+				corpcontact = crs.getNString("companyContact");
 				UserHomePage homePage = new UserHomePage();
 				homePage.setVisible(true);
 				homePage.pack();

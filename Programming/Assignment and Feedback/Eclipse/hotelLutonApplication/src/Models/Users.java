@@ -5,6 +5,7 @@ public class Users {
 	private String email;
 	private String userName;
 	private String password;
+	private String confirmPassword;
 	private String userType;
 	
 	public Users() {
@@ -12,14 +13,16 @@ public class Users {
 		this.email = "";
 		this.userName = "";
 		this.password = "";
+		this.confirmPassword = "";
 		this.userType = "";
 	}
 	
-	public Users(int id, String email, String userName, String password, String role, String userType ) {
+	public Users(int id, String email, String userName, String password, String confirmPassword, String userType ) {
 		Users.userID = id;
 		this.email = email;
 		this.userName = userName;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.userType = userType;
 	}
 
@@ -53,6 +56,15 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getUserType() {
