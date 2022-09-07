@@ -2,6 +2,7 @@ package FrontendLayer;
 
 import java.awt.event.MouseListener;
 
+
 import java.util.ArrayList;
 
 import javax.swing.JInternalFrame;
@@ -14,9 +15,12 @@ import Models.DefultModel;
 import Models.Room;
 import ServiceLayer.BookingDetailsServiceLayer;
 import ServiceLayer.RoomServiceLayer;
-
+import ServiceLayer.UserDetailsServiceLayer;
 
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BookingDetailsTable extends JInternalFrame {
 	private JTable bookingtable;
@@ -41,6 +45,33 @@ public class BookingDetailsTable extends JInternalFrame {
 		
 		bookingtable = new JTable();
 		scrollPane.setViewportView(bookingtable);
+		
+		JButton btnDeleteBooking = new JButton("DELETE Booking");
+		btnDeleteBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(bookingtable.getSelectionModel().isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null,"No Selected Item" );
+
+                }
+                int row = bookingtable.getSelectedRow();
+                DefaultTableModel model =  (DefaultTableModel) bookingtable.getModel();
+                int reserveID = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+                DefultModel defultmodel = new DefultModel();
+                defultmodel.setBookingID(reserveID);
+
+
+                BookingDetailsServiceLayer bookingDetailsSL = new BookingDetailsServiceLayer();
+                try {
+                	bookingDetailsSL.deleteBooking(defultmodel);
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+			}
+		});
+		btnDeleteBooking.setBounds(12, 31, 142, 27);
+		getContentPane().add(btnDeleteBooking);
 		
 		model = new DefaultTableModel();
 		Object[] columnsName = new Object[11];

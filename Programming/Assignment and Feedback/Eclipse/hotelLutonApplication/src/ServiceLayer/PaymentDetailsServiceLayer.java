@@ -27,9 +27,9 @@ public class PaymentDetailsServiceLayer {
 			throw e;
 		}
 	}
-	public DefultModel generateBill(DefultModel model) throws Exception {
+	public DefultModel generateBill() throws Exception {
 		try {
-			PaymentDetailsDatabaseLayer paymentDatabaseLayer = new PaymentDetailsDatabaseLayer(model);
+			PaymentDetailsDatabaseLayer paymentDatabaseLayer = new PaymentDetailsDatabaseLayer(defultModel);
 			return paymentDatabaseLayer.generateBill();
 		}catch(Exception e) {
 			throw e;

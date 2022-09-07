@@ -50,9 +50,13 @@ public class CreditCardDatabaseLayer {
 		
 		
 			PreparedStatement statement;
+			PreparedStatement updateStatement;
+
 			ResultSet rs;
 			String creditDetailQuery = "INSERT INTO CreditCard (cardType,nameOnCard, cardNo, cusID) VALUES (?,?,?,?)";
-		try {
+			String updateQuery = "Update CreditCard SET cardType = ?,nameOnCard = ?, cardNo = ? WHERE cusID= ?";
+
+			try {
 			
 				String[] creditID = new String[] { "id" };
 				
@@ -62,10 +66,18 @@ public class CreditCardDatabaseLayer {
 				statement.setString(3, this.credit.getCardNo());
 				statement.setInt(4, UserDatabaseLayer.cusPrimeKey);
 				
+				
+				updateStatement = this.connection.prepareStatement(updateQuery);
+				updateStatement.setString(1, this.credit.getCardType());
+				updateStatement.setString(2, this.credit.getNameOnCard());
+				updateStatement.setString(3, this.credit.getCardNo());
+				updateStatement.setInt(4, UserDatabaseLayer.cusPrimeKey);
+				
+				
 				try {
 					
 					if (statement.executeUpdate() !=0) {
-						
+						updateStatement.executeUpdate();
 						ResultSet generatedKeys = statement.getGeneratedKeys();
 						 if ( generatedKeys.next() ) {
 				                creditPrimkey = generatedKeys.getInt(1);

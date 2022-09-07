@@ -26,8 +26,14 @@ public boolean validateCreditDetails(CreditCard credit) throws InputException {
 		if(credit.getNameOnCard() == null || credit.getNameOnCard().length() == 0) {
 			throw new InputException("Please enter your name used on card.");
 		}
+		if(!(credit.getNameOnCard()).matches("^[a-zA-Z\\s]*$") ) {
+			throw new InputException("Cannot input number on  name");
+		}
 		if(credit.getCardNo() == null || credit.getCardNo().length() == 0) {
 			throw new InputException("Credit Card Number canot be empty.");
+		}
+		if(!(credit.getCardNo()).matches("^[0-9, ]+$") ) {
+			throw new InputException("cannot input alphabet on contact");
 		}
 
 

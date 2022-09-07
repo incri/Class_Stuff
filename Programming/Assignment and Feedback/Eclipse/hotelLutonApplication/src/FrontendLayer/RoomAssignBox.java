@@ -93,7 +93,7 @@ public class RoomAssignBox extends JInternalFrame {
 	
 		try {
 			 defultModel = new DefultModel();
-			 defultModel.setBookingID(customerTextBox.getText());
+			 defultModel.setBookingID(Integer.parseInt(customerTextBox.getText()));
 			 defultModel.setRoomNo(roomNoTextField.getText());
 			
 			

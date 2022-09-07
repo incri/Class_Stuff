@@ -92,7 +92,7 @@ approvedBy INT
 CREATE TABLE Billing(
 
 billID INT PRIMARY KEY AUTO_INCREMENT,
-toPayDate VARCHAR(20) NOT NULL,
+toPayDate VARCHAR(20) ,
 totalBill VARCHAR(20),
 reserveID INT NOT NULL,
 cardNo VARCHAR(20),

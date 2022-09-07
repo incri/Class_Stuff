@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import FrontendLayer.AdminPage;
-import FrontendLayer.GeneratedBillBox;
+
 import FrontendLayer.UserHomePage;
 import Helper.DatabaseConnector;
 import Models.DefultModel;
@@ -58,7 +58,7 @@ public class PaymentDetailsDatabaseLayer {
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
 				DefultModel dM = new DefultModel();
-				dM.setBookingID(rs.getString("reserveID"));
+				dM.setBookingID(rs.getInt("reserveID"));
 				dM.setGuestName(rs.getString("fullName"));
 				dM.setContact(rs.getString("contact"));
 				dM.setRoomNo(rs.getString("roomNo"));
@@ -91,7 +91,7 @@ public DefultModel generateBill() throws Exception {
 		try {
 			
 			billStatement = this.connection.prepareStatement(billQuery);
-			billStatement.setString(1, this.defultModel.getBookingID());
+			billStatement.setInt(1, this.defultModel.getBookingID());
 			billStatement.setInt(2, UserDatabaseLayer.cusPrimeKey);
 			
 			brs = billStatement.executeQuery();
@@ -99,12 +99,6 @@ public DefultModel generateBill() throws Exception {
 			//condition if the username and password match
 			if (brs.next())
 			{
-
-				GeneratedBillBox bill = new GeneratedBillBox();
-				bill.setVisible(true);
-				bill.pack();
-				bill.setLocationRelativeTo(null);
-				
 				
 			}
 			

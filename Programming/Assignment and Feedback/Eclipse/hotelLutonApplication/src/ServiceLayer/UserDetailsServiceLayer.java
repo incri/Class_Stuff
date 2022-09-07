@@ -2,6 +2,9 @@ package ServiceLayer;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import DatabaseLayer.UserDatabaseLayer;
 import DatabaseLayer.UserDetailsDatabaseLayer;
 import Models.DefultModel;
 
@@ -24,5 +27,16 @@ public class UserDetailsServiceLayer {
 		}catch(Exception e) {
 			throw e;
 		}
+	}
+	public DefultModel deleteUser(DefultModel defultmodel) throws Exception {
+		// This function saves the user detail to database and returns the user object after saving
+		try {
+
+			UserDetailsDatabaseLayer dlDetailsUser = new UserDetailsDatabaseLayer(defultModel);
+			dlDetailsUser.deleteUser(defultmodel);
+		} catch (Exception e) {
+			throw e;
+		}
+		return defultmodel;
 	}
 }

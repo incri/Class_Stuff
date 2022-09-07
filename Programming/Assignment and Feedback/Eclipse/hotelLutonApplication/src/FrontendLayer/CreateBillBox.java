@@ -92,7 +92,7 @@ public class CreateBillBox extends JInternalFrame {
 	
 		try {
 			 defultModel = new DefultModel();
-			 defultModel.setBookingID(customerTextBox.getText());
+			 defultModel.setBookingID(Integer.parseInt(customerTextBox.getText()));
 			 defultModel.setDiscountPer(discountPerTextField.getText());
 			 
 			

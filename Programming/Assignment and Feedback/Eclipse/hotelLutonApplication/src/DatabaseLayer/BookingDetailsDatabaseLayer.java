@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 
 import Helper.DatabaseConnector;
 import Models.DefultModel;
@@ -50,7 +51,7 @@ public class BookingDetailsDatabaseLayer {
 					+ "g.checkOutDate, r.bookingStatus , r.roomNo FROM Reservation r "
 					+ "LEFT JOIN Customer c2  ON c2.cusID = r.cusID "
 					+ "LEFT JOIN Corporate c ON r.cusID = c.cusID "
-					+ "LEFT JOIN CreditCard cc ON cc.cusID = r.reserveID "
+					+ "LEFT JOIN CreditCard cc ON cc.cusID = r.cusID "
 					+ "LEFT JOIN Guest g ON g.guestID = r.reserveID  "
 					+ "GROUP BY r.reserveID";
 			Statement statement = this.connection.createStatement();
@@ -59,7 +60,7 @@ public class BookingDetailsDatabaseLayer {
 				
 				
 				DefultModel dM = new DefultModel();
-				dM.setBookingID(rs.getString("reserveID"));
+				dM.setBookingID(rs.getInt("reserveID"));
 				dM.setName(rs.getString("fullName"));
 				dM.setCorpName(rs.getString("companyName"));
 				dM.setCorpContact(rs.getString("companyContact"));
@@ -96,7 +97,7 @@ public class BookingDetailsDatabaseLayer {
 			while(rs.next()) {
 				
 				DefultModel dM = new DefultModel();
-				dM.setBookingID(rs.getString("reserveID"));
+				dM.setBookingID(rs.getInt("reserveID"));
 				dM.setName(rs.getString("fullName"));
 				dM.setCardNumber(rs.getString("cardNo"));
 				dM.setRoomPreference(rs.getString("roomPreference"));
@@ -114,5 +115,26 @@ public class BookingDetailsDatabaseLayer {
 		catch(Exception ex) {
 			throw ex;
 		}
+	}
+	public DefultModel deleteBooking(DefultModel defultmodel) throws Exception {
+		try {
+			// create the statement
+
+			String query = "DELETE FROM Reservation  WHERE reserveID = ?";
+			
+			PreparedStatement statement = this.connection.prepareStatement(query);
+			statement.setInt(1,defultmodel.getBookingID());
+			// execute the query
+			if(statement.executeUpdate()!= 0) {
+				JOptionPane.showInternalMessageDialog(null, "Booking Details Deleted");
+			}
+			else {
+				JOptionPane.showInternalMessageDialog(null, "Unable to delete");
+
+			}
+		}catch(Exception ex) {
+			throw ex;
+		}
+		return defultModel;
 	}
 }

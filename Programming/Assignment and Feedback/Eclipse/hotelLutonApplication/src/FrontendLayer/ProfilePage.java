@@ -13,6 +13,7 @@ import DatabaseLayer.BookingDetailsDatabaseLayer;
 import DatabaseLayer.UserDatabaseLayer;
 import Models.DefultModel;
 import ServiceLayer.BookingDetailsServiceLayer;
+import ServiceLayer.PaymentDetailsServiceLayer;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -34,6 +35,8 @@ public class ProfilePage extends JFrame {
 	private JPanel contentPane;
 	private JTable userBookingTable;
 	private DefaultTableModel model;
+	private DefaultTableModel paymentmodel;
+	private JTable paymentTable;
 
 	
 	
@@ -110,8 +113,22 @@ public class ProfilePage extends JFrame {
 		profilePanel.add(corpContactLabel);
 		
 		JDesktopPane lowerDesktopPane = new JDesktopPane();
+		lowerDesktopPane.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		lowerDesktopPane.setBounds(597, 315, 595, 237);
 		contentPane.add(lowerDesktopPane);
+		lowerDesktopPane.setLayout(null);
+		
+		JScrollPane lowerScrollPane = new JScrollPane();
+		lowerScrollPane.setBounds(12, 73, 568, 152);
+		lowerDesktopPane.add(lowerScrollPane);
+		
+		paymentTable = new JTable();
+		lowerScrollPane.setViewportView(paymentTable);
+		
+		JLabel lblPayment = new JLabel("Generated Bill");
+		lblPayment.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblPayment.setBounds(219, 23, 197, 23);
+		lowerDesktopPane.add(lblPayment);
 		
 		JButton btnEditProfile = new JButton("Edit Profile");
 		btnEditProfile.setBounds(34, 374, 105, 27);
@@ -121,9 +138,7 @@ public class ProfilePage extends JFrame {
 		btnGenerateBiil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				BillGenerateBox billGenerate = new BillGenerateBox();
-				lowerDesktopPane.add(billGenerate);
-				billGenerate.setVisible(true);
+				loadAllPayment();
 			}
 		});
 		btnGenerateBiil.setBounds(161, 374, 135, 27);
@@ -172,6 +187,15 @@ public class ProfilePage extends JFrame {
 		model.setColumnCount(0);
 		model.setColumnIdentifiers(columnsName);
 		
+		paymentmodel = new DefaultTableModel();
+		Object[] columnspayment = new Object[3];
+		columnspayment[0] = "Booking ID";
+		columnspayment[1] = "Total Bill";
+		columnspayment[2] = "Payment Status";
+		
+		paymentmodel.setColumnCount(0);
+		paymentmodel.setColumnIdentifiers(columnspayment);
+		
 	}
 	
 	public void loadAllUserbooking() {
@@ -206,5 +230,28 @@ public class ProfilePage extends JFrame {
 
 	}
 	
-	 
+	public void loadAllPayment() {
+		try {
+			PaymentDetailsServiceLayer paymentSL = new PaymentDetailsServiceLayer();
+			ArrayList<DefultModel> defultModel = paymentSL.getAllPayment();
+			setTablePaymentData(defultModel);
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+	private void setTablePaymentData(ArrayList<DefultModel> defultModel) {
+		// Create the object array from arraylist and add to the table row
+		Object[] rowData = new Object[3];
+		// set the number of rows in table model to zero
+		paymentmodel.setRowCount(0);
+		for(int i=0; i<defultModel.size(); i++) {
+			rowData[0] = defultModel.get(i).getBookingID();
+			rowData[1] = defultModel.get(i).getTotalBill();
+			rowData[2] = defultModel.get(i).getPaymentStatus();
+		
+			paymentmodel.addRow(rowData);
+		}
+		paymentTable.setModel(paymentmodel);
+
+	}
 }

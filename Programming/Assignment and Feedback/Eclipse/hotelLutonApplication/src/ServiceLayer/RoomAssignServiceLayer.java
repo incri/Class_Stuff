@@ -15,6 +15,8 @@ public class RoomAssignServiceLayer {
 	public DefultModel getDefultModel() {
 		return defultModel;
 	}
+	
+	
 
 
 	

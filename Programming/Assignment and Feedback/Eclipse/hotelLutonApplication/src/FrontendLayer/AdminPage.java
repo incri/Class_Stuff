@@ -78,15 +78,6 @@ public class AdminPage extends JFrame {
 		apBtnUsersDetails.setBounds(12, 12, 116, 27);
 		upperButtonPanel.add(apBtnUsersDetails);
 		
-		JButton detailBtnSearch = new JButton("Search");
-		detailBtnSearch.setBounds(1135, 12, 105, 32);
-		upperButtonPanel.add(detailBtnSearch);
-		
-		JTextField detailSearchTextField = new JTextField();
-		detailSearchTextField.setBounds(845, 12, 258, 32);
-		upperButtonPanel.add(detailSearchTextField);
-		detailSearchTextField.setColumns(10);
-		
 		JButton btnRoomDetails = new JButton("Rooms");
 		btnRoomDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

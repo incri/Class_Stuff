@@ -14,7 +14,12 @@ import Models.DefultModel;
 import Models.Room;
 import Models.Users;
 import ServiceLayer.UserDetailsServiceLayer;
+import ServiceLayer.UserServiceLayer;
+
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
@@ -38,6 +43,16 @@ public class UserDetailsTable extends JInternalFrame {
 		userTable = new JTable();
 		userTable.setFillsViewportHeight(true);
 		scrollPane.setViewportView(userTable);
+		
+		JButton btnDeleteUser = new JButton("Delete User");
+		btnDeleteUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+
+			}
+		});
+		btnDeleteUser.setBounds(12, 29, 105, 27);
+		getContentPane().add(btnDeleteUser);
 		
 		model = new DefaultTableModel();
 		Object[] columnsName = new Object[5];
@@ -81,5 +96,4 @@ public class UserDetailsTable extends JInternalFrame {
 		userTable.setModel(model);
 
 	}
-	
 }

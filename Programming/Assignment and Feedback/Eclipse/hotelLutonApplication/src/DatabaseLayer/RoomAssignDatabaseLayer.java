@@ -55,21 +55,26 @@ public class RoomAssignDatabaseLayer {
 			
 			
 		try {
-			String inserRoomNoQuery = "UPDATE Reservation r SET r.roomNo = ? WHERE r.reserveID = ?";
+			String inserRoomNoQuery = "UPDATE Reservation r INNER JOIN CreditCard c ON c.cusID = r.cusID  SET r.roomNo = ? "
+					+ "WHERE r.reserveID = ? AND r.bookingStatus =  'Pending' AND c.cardNo IS NOT NULL AND r.roomNo IS NULL";
 			updateRoomStatement = this.connection.prepareStatement(inserRoomNoQuery);
 			updateRoomStatement.setString(1, this.defultModel.getRoomNo());
-			updateRoomStatement.setString(2, this.defultModel.getBookingID());
+			updateRoomStatement.setInt(2, this.defultModel.getBookingID());
 			
 			String updateStatusQuery = "UPDATE Reservation r INNER JOIN Room ro ON r.roomNo = ro.roomNo SET"
 					+ " r.bookingStatus = 'Approved', ro.roomStatus = 'Booked'  WHERE reserveID = ?";
 			updateStatusStatement = this.connection.prepareStatement(updateStatusQuery);
-			updateStatusStatement.setString(1, this.defultModel.getBookingID());
+			updateStatusStatement.setInt(1, this.defultModel.getBookingID());
 				try {
 					
-					updateRoomStatement.executeUpdate();
-					updateStatusStatement.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Room Assigned", "Complete", 2);
-					
+					if (updateRoomStatement.executeUpdate() != 0) {
+						updateStatusStatement.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Room Assigned", "Complete", 2);
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "Room Assigned failed Please check Credit "
+								+ "Card Detail Or Room no is already assigned or not", "Failed", 2);
+					}
 					
 				} catch (Exception ex) {
 					throw ex;

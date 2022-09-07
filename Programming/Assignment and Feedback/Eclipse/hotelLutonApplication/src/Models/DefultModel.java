@@ -1,14 +1,14 @@
 package Models;
 
 public class DefultModel {
-	private String userID;
+	private int userID;
 	private String cusID;
 	private String roomNo;
-	private String bookingID;
+	private int bookingID;
 	private String corpID;
 	private String  guestID;
 	private String  reserveID;
-	private String  billID;
+	private int  billID;
 	
 	
 	private String email;
@@ -34,14 +34,14 @@ public class DefultModel {
 	
 	public DefultModel() {
 	
-		this.userID = "";
+		this.userID = 0;
 		this.cusID = "";
 		this.roomNo = "";
-		this.bookingID = "";
+		this.bookingID = 0;
 		this.corpID = "";
 		this.guestID = "";
 		this.reserveID = "";
-		this.billID = "";
+		this.billID = 0;
 		
 		this.email =  "";
 		this.name =  "";
@@ -65,8 +65,8 @@ public class DefultModel {
 
 
 	
-	public DefultModel(String userID, String cusID,String roomNo,
-			String bookingID, String guestID, String reserveID, String billID, String corpID,
+	public DefultModel(int userID, String cusID,String roomNo,
+			int bookingID, String guestID, String reserveID, int billID, String corpID,
 			String email, String name, String corpName, String corpContact, String guestName, String contact,
 			String roomPreference, String country, String checkInDate, String checkOutDate, String cardType,
 			String cardNumber, String nameOncard, String bookingStatus, String paymentStatus, String totalBill, String nameOnCard,String pricePerNight, String discountPer ) {
@@ -102,14 +102,14 @@ public class DefultModel {
 
 
 
-	public  String getUserID() {
+	public  int getUserID() {
 		return userID;
 	}
 
 
 
-	public void setUserID(String string) {
-		this.userID = string;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 
@@ -138,14 +138,14 @@ public class DefultModel {
 
 
 
-	public String getBookingID() {
+	public int getBookingID() {
 		return bookingID;
 	}
 
 
 
-	public void setBookingID(String string) {
-		this.bookingID = string;
+	public void setBookingID(int reserveID2) {
+		this.bookingID = reserveID2;
 	}
 
 
@@ -186,14 +186,14 @@ public class DefultModel {
 
 
 
-	public  String getBillID() {
+	public  int getBillID() {
 		return billID;
 	}
 
 
 
-	public  void setBillID(String billID) {
-		this.billID = billID;
+	public  void setBillID(int reserveID2) {
+		this.billID = reserveID2;
 	}
 
 

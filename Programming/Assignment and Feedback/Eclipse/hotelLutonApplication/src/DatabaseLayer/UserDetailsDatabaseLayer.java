@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 
 import Helper.DatabaseConnector;
 import Models.DefultModel;
@@ -47,12 +48,12 @@ public class UserDetailsDatabaseLayer {
 		try {
 			ArrayList<DefultModel> defultModel = new ArrayList<DefultModel>();
 			String query = "SELECT u.userID, CONCAT(c.firstName,\" \" ,c.lastName) AS Name, u.email, c2.companyName, c2.companyContact FROM Users u LEFT JOIN Customer c ON u.userID = c.userID \n"
-					+ "LEFT JOIN Corporate c2 ON c2.userID = u.userID ";
+					+ "LEFT JOIN Corporate c2 ON c2.userID = u.userID GROUP BY u.userID ORDER BY u.userID ";
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()) {
 				DefultModel dM = new DefultModel();
-				dM.setUserID(rs.getString("UserID"));
+				dM.setUserID(rs.getInt("UserID"));
 				dM.setName(rs.getString("name"));
 				dM.setEmail(rs.getString("email"));
 				dM.setCorpName(rs.getString("companyName"));
@@ -64,5 +65,27 @@ public class UserDetailsDatabaseLayer {
 		catch(Exception ex) {
 			throw ex;
 		}
+	}
+	public DefultModel deleteUser(DefultModel defultmodel) throws Exception {
+		try {
+			// create the statement
+
+			String query = "DELETE FROM Users INNER JOIN  WHERE userID = ?";
+			
+			PreparedStatement statement = this.connection.prepareStatement(query);
+			statement.setInt(1,defultmodel.getUserID());
+			// execute the query
+			if(statement.executeUpdate()!= 0) {
+				JOptionPane.showInternalMessageDialog(null, "User Deleted");
+
+			}
+			else {
+				JOptionPane.showInternalMessageDialog(null, "Unable to delete");
+
+			}
+		}catch(Exception ex) {
+			throw ex;
+		}
+		return defultModel;
 	}
 }
