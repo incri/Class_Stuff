@@ -1,4 +1,4 @@
-package FrontendLayer;
+  package FrontendLayer;
 
 import java.awt.Image;
 
@@ -119,6 +119,17 @@ public class AdminPage extends JFrame {
 		});
 		btnPayment.setBounds(450, 12, 105, 27);
 		upperButtonPanel.add(btnPayment);
+		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WelcomePage wel = new WelcomePage();
+				wel.setVisible(true);
+				dispose();
+			}
+		});
+		btnLogOut.setBounds(1127, 12, 105, 27);
+		upperButtonPanel.add(btnLogOut);
 		
 		JDesktopPane sideDesktopPane = new JDesktopPane();
 		sideDesktopPane.setBorder(new LineBorder(new Color(0, 0, 0), 3));

@@ -94,7 +94,8 @@ public class BillGenerateDatabaseLayer {
 			String updateBillQuery = "UPDATE Billing b LEFT "
 					+ "JOIN Reservation r ON b.reserveID = r.reserveID  "
 					+ "LEFT JOIN Corporate c ON c.cusID = r.cusID "
-					+ "SET b.totalBill = (b.totalBill -(b.totalBill * b.discountPer)/100) "
+					+ "SET b.totalBill = (b.totalBill -(b.totalBill * b.discountPer)/100), "
+					+"b.toPayDate = DATE_ADD(b.toPayDate, INTERVAL 1 MONTH)"
 					+ "WHERE c.corpID != 0 AND r.reserveID = ? AND r.roomNo IS NOT NULL" ;
 			discountUpdatestatement = this.connection.prepareStatement(updateBillQuery);
 			discountUpdatestatement.setInt(1, this.defultModel.getBookingID());

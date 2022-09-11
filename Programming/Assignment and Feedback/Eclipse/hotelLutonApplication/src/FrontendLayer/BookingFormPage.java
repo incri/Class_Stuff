@@ -216,7 +216,17 @@ public class BookingFormPage extends JFrame {
 		creditCardChckbx.setBounds(26, 422, 153, 25);
 		detailsPanel.add(creditCardChckbx);
 		
-		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserHomePage pg = new UserHomePage();
+				pg.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setBounds(135, 270, 105, 27);
+		contentPane.add(btnBack);
+
 		
 	}
 	

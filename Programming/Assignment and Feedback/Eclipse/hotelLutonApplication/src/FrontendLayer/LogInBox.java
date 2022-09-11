@@ -93,7 +93,7 @@ public class LogInBox extends JInternalFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				userLogIn();
-				
+				  
 			}
 		});
 		btnLogin.setBounds(117, 262, 105, 27);

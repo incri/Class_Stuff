@@ -1,7 +1,6 @@
 package FrontendLayer;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import DatabaseLayer.BookingDetailsDatabaseLayer;
 import DatabaseLayer.UserDatabaseLayer;
 import Models.DefultModel;
 import ServiceLayer.BookingDetailsServiceLayer;
@@ -169,6 +167,30 @@ public class ProfilePage extends JFrame {
 		lblBookingHistory.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblBookingHistory.setBounds(218, 12, 142, 23);
 		upperDesktopPane.add(lblBookingHistory);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserHomePage up = new UserHomePage();
+				up.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setBounds(51, 23, 62, 27);
+		btnBack.setFocusable(false);
+		contentPane.add(btnBack);
+		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WelcomePage wel = new WelcomePage();
+				wel.setVisible(true);
+				dispose();
+			}
+		});
+		btnLogOut.setFocusable(false);
+		btnLogOut.setBounds(142, 23, 82, 27);
+		contentPane.add(btnLogOut);
 		
 		
 		
